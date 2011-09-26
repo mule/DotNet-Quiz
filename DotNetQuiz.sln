@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetQuiz", "DotNetQuiz\DotNetQuiz.csproj", "{B335E64D-FA38-4588-81F5-6E795A8A881B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetQuizTests", "DotNetQuizTests\DotNetQuizTests.csproj", "{62372A76-8544-4EE9-B60E-62935FF26508}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{416AEA88-1B11-4C67-95FD-D43979DB761B}"
+	ProjectSection(SolutionItems) = preProject
+		DotNetQuiz.vsmdi = DotNetQuiz.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = DotNetQuiz.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B335E64D-FA38-4588-81F5-6E795A8A881B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B335E64D-FA38-4588-81F5-6E795A8A881B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B335E64D-FA38-4588-81F5-6E795A8A881B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B335E64D-FA38-4588-81F5-6E795A8A881B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62372A76-8544-4EE9-B60E-62935FF26508}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62372A76-8544-4EE9-B60E-62935FF26508}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62372A76-8544-4EE9-B60E-62935FF26508}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62372A76-8544-4EE9-B60E-62935FF26508}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

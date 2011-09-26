@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "Index.cshtml";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+      
+}
+@model DotNetQuiz.Models.Question
+
+<section id="questionBox">
+<div id="question">
+
+@Model.QuestionText
+
+</div>
+
+
+
+@using (Html.BeginForm())
+{
+    <div id="answersOptions">
+    @foreach (Tuple<int, string> answerOption in Model.AnswerOptions)
+    {
+        <div class="answer">
+            @Html.RadioButton("Answer", answerOption.Item1) @answerOption.Item2
+        </div>
+    }
+     </div>
+    <div id="answerBtnBox">
+        <input  id="btnAnswer" type="submit" value="Answer" />
+    </div>
+}
+</section>
+
+<section id="answerBox" style="display: none">
+<div id="succesBox"></div>
+<div id="messageBox"></div>
+<div>
+<input id="btnNextQuestion" onclick=""/>
+</div>
+</section>
+
+@section footer{}
+
+@section scripts
+{
+<script type="text/javascript">
+
+var questionData = { question: 0, answer: 0 };
+$(function () {
+    $('form').submit(function () {
+        $.ajax({
+            url: "Quiz/Answer",
+            type: "POST",
+            data: questionData,
+            dataType: "json",
+
+            success: function (result) {
+                $('#questionBox').hide();
+                var answer = $('#answerBox');
+                answer.show();
+                if (result.correct == false) {
+                    answer.find('#succesBox').text("Answer was incorrect");
+                    answer.find('#messageBox').text(result.message);
+                }
+
+            }
+        });
+        return false;
+    });
+});
+
+
+function Quiz()
+{
+    var quizId;
+    var currentQuestionId;
+    var currentAnswerId;
+    
+    function GetQuestion() {
+        $.ajax({
+            url: "Quiz/Question",
+            type: "POST",
+            data: quizId,
+            dataType: "json",
+
+            success: function (result) { }
+
+
+        })        
+    }
+}
+
+</script>
+}
