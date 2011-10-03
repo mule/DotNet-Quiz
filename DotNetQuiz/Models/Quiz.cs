@@ -10,6 +10,7 @@ namespace DotNetQuiz.Models
 
         public int QuizId { get; set; }
         public DateTime StartTime { get; set; }
+        public IEnumerable<Tuple<int,int>> Answers { get; set; }
 
     }
 }

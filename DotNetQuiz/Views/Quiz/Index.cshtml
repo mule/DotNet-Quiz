@@ -22,7 +22,7 @@
 
      </div>
     <div id="answerBtnBox">
-        <input  id="btnAnswer" type="submit" value="Answer" />
+        <input  id="btnAnswer" type="button" value="Answer" onclick="quiz.AnswerQuestion()" />
     </div>
 }
 </section>
@@ -31,7 +31,7 @@
 <div id="succesBox"></div>
 <div id="messageBox"></div>
 <div>
-<input type="button" id="btnNextQuestion" onclick="quiz.GetQuestion(); "/>
+<input type="button" id="btnNextQuestion" value="Next question" onclick="quiz.GetQuestion(); "/>
 </div>
 </section>
 
@@ -48,7 +48,7 @@
 </script>
 <script type="text/javascript">
 
-    var questionData = { question: 0, answer: 0 };
+   
     var quiz = new Quiz();
 
     $(document).ready(function () {
@@ -57,37 +57,12 @@
     
 
 
-
-$(function () {
-    $('form').submit(function () {
-        $.ajax({
-            url: "Quiz/Answer",
-            type: "POST",
-            data: questionData,
-            dataType: "json",
-
-            success: function (result) {
-                $('#questionBox').hide();
-                var answer = $('#answerBox');
-                answer.show();
-                if (result.correct == false) {
-                    answer.find('#succesBox').text("Answer was incorrect");
-                    answer.find('#messageBox').text(result.message);
-                }
-
-            }
-        });
-        return false;
-    });
-});
-
-
 function Quiz()
 {
     var quizId;
     var startTime;
     var currentQuestionId;
-    var currentAnswerId;
+
     var me = this;
 
     Quiz.prototype.GetQuestion = function () {
@@ -98,6 +73,7 @@ function Quiz()
             dataType: "json",
 
             success: function (result) {
+                me.currentQuestionId = result.QuestionId;
                 var answer = $('#answerBox');
                 answer.hide();
                 var qBox = $('#questionBox');
@@ -145,6 +121,7 @@ function Quiz()
                     datatype: "json",
                     success: function (result) {
                         me.startTime = result.StartTime;
+                        
                         me.GetQuestion();
                     },
                     failure: function (result) {
@@ -155,7 +132,38 @@ function Quiz()
                 me.StartNewQuiz();
             }
         };
-    
+
+
+        Quiz.prototype.AnswerQuestion = function () {
+
+            var answerId = $('.answer input:radio[checked=true]').val();
+
+
+            $.ajax({
+                url: "Quiz/Answer",
+                type: "POST",
+                data: { question: me.currentQuestionId, answer: parseInt(answerId), quizId: me.quizId },
+                dataType: "json",
+                success: function (result) {
+                    $('#questionBox').hide();
+                    var answer = $('#answerBox');
+                    if (result.correct == false) {
+                        answer.find('#succesBox').text("Answer was incorrect");
+                        answer.find('#messageBox').text(result.message);
+                    } else {
+                        answer.find('#succesBox').text("Answer was correct");
+                        answer.find('#messageBox').text(result.message);
+                    }
+                    answer.show();
+
+                }
+            });
+
+
+
+
+
+        };
 
 }
 

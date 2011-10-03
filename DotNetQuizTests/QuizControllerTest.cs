@@ -101,13 +101,13 @@ namespace DotNetQuizTests
         [UrlToTest("http://localhost:53311/")]
         public void AnswerTest()
         {
-            QuizController target = new QuizController(); // TODO: Initialize to an appropriate value
-            int question = 0; // TODO: Initialize to an appropriate value
-            int answer = 0; // TODO: Initialize to an appropriate value
+            QuizController target = new QuizController(); 
+            int question = 1;
+            int answer = 1;
+            int quiz = 1;
 
 
-
-            var actual = target.Answer(question, answer) as JsonResult;
+            var actual = target.Answer(question, answer,quiz) as JsonResult;
             dynamic data = actual.Data;
 
            Assert.IsTrue(data.correct == false);

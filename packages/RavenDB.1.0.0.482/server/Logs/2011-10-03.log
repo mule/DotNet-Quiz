@@ -1,0 +1,197 @@
+time;logger;level;message;exception
+2011-10-03 21:54:53.2832;Raven.Database.Impl.DocumentCacher;Info;"MemoryCache Settings:
+  PhysicalMemoryLimit = 98
+  CacheMemoryLimit    = 1072693248
+  PollingInterval     = 00:02:00";
+2011-10-03 21:54:53.3300;Raven.Storage.Esent.TransactionalStorage;Info;"Esent Settings:
+  MaxVerPages      = 32768
+  CacheSizeMax     = 262144
+  DatabasePageSize = 4096";
+2011-10-03 21:54:56.1692;Raven.Database.DocumentDatabase;Debug;Delete a document with key: Raven/Backup/Status and etag ;
+2011-10-03 21:54:56.1848;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Backup/Status' was not found, and considered deleted;
+2011-10-03 21:56:16.1338;Raven.Database.Storage.IndexDefinitionStorage;Info;"New index Raven%2fDocumentsByEntityName:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+where  Tag != null 
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.ForEntityNames.Add(null);
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			where Tag != null
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+where  Tag != null 
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.ForEntityNames.Add(null);
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			where Tag != null
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+";
+2011-10-03 21:56:16.4770;Raven.Database.Indexing.IndexStorage;Info;Creating index Raven/DocumentsByEntityName with encoded name Raven/DocumentsByEntityName;
+2011-10-03 21:56:16.7734;Raven.Database.Indexing.Index.Indexing;Debug;Creating index for Raven/DocumentsByEntityName;
+2011-10-03 21:56:18.1340;Raven.Database.Server.HttpServer;Debug;Request #   1: GET     -    22 ms - <default>  - 200 - /silverlight/plugins?noCache=-1781368036;
+2011-10-03 21:56:18.5376;Raven.Database.Server.HttpServer;Debug;Request #   2: GET     -    10 ms - <default>  - 200 - /databases/?noCache=-1499379631;
+2011-10-03 21:56:18.5896;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/WarningMessages' was not found;
+2011-10-03 21:56:18.5896;Raven.Database.Server.HttpServer;Debug;Request #   3: GET     -    20 ms - <default>  - 404 - /docs/Raven/WarningMessages;
+2011-10-03 21:56:18.8036;Raven.Database.Server.HttpServer;Debug;Request #   4: GET     -    51 ms - <default>  - 200 - /terms/Raven/DocumentsByEntityName?field=Tag&fromValue=&pageSize=128&noCache=-1442145297;
+2011-10-03 21:56:18.8196;Raven.Database.Server.HttpServer;Debug;Request #   5: GET     -   146 ms - <default>  - 200 - /stats?noCache=78796657;
+2011-10-03 21:56:18.9507;Raven.Database.Server.HttpServer;Debug;Request #   6: GET     -     4 ms - <default>  - 200 - /silverlight/ensureStartup?noCache=-1562981638;
+2011-10-03 21:56:18.9507;Raven.Database.Server.HttpServer;Debug;Request #   7: GET     -    11 ms - <default>  - 200 - /docs/?start=0&pageSize=12&noCache=583534309;
+2011-10-03 21:56:19.0897;Raven.Database.Server.HttpServer;Debug;Request #   8: GET     -     2 ms - <default>  - 200 - /terms/Raven/DocumentsByEntityName?field=Tag&fromValue=&pageSize=128&noCache=1164349701;
+2011-10-03 21:56:19.1497;Raven.Database.Server.HttpServer;Debug;Request #   9: GET     -     0 ms - <default>  - 200 - /docs/?start=0&pageSize=12&noCache=-1600325011;
+2011-10-03 21:56:19.4177;Raven.Database.Server.HttpServer;Debug;Request #  10: GET     -     4 ms - <default>  - 200 - /build/version;
+2011-10-03 21:56:25.0066;Raven.Database.Server.HttpServer;Debug;Request #  11: GET     -     6 ms - <default>  - 200 - /indexes/?start=0&pageSize=8&noCache=-1074576356;
+2011-10-03 21:56:25.8536;Raven.Database.Server.HttpServer;Debug;Request #  12: GET     -     1 ms - <default>  - 200 - /terms/Raven/DocumentsByEntityName?field=Tag&fromValue=&pageSize=128&noCache=-1588770378;
+2011-10-03 21:56:30.5130;Raven.Database.Server.HttpServer;Debug;Request #  13: GET     -     1 ms - <default>  - 200 - /terms/Raven/DocumentsByEntityName?field=Tag&fromValue=&pageSize=128&noCache=367911219;
+2011-10-03 21:56:32.8133;Raven.Database.Server.HttpServer;Debug;Request #  14: GET     -     0 ms - <default>  - 200 - /docs/?start=0&pageSize=12&noCache=1196322285;
+2011-10-03 21:56:32.8133;Raven.Database.Server.HttpServer;Debug;Request #  15: GET     -     2 ms - <default>  - 200 - /terms/Raven/DocumentsByEntityName?field=Tag&fromValue=&pageSize=128&noCache=2031649663;
+2011-10-03 21:56:38.5878;Raven.Database.Server.HttpServer;Debug;Request #  16: GET     -     1 ms - <default>  - 200 - /terms/Raven/DocumentsByEntityName?field=Tag&fromValue=&pageSize=128&noCache=1309697779;
+2011-10-03 21:56:39.2588;Raven.Database.Server.HttpServer;Debug;Request #  17: GET     -     0 ms - <default>  - 200 - /docs/?start=0&pageSize=12&noCache=-1308688260;
+2011-10-03 21:56:39.2588;Raven.Database.Server.HttpServer;Debug;Request #  18: GET     -     1 ms - <default>  - 200 - /terms/Raven/DocumentsByEntityName?field=Tag&fromValue=&pageSize=128&noCache=1194862784;
+2011-10-03 21:56:42.5431;Raven.Database.Server.HttpServer;Debug;Request #  19: GET     -     0 ms - <default>  - 200 - /indexes/?start=0&pageSize=8&noCache=-902618845;
+2011-10-03 21:56:47.3242;Raven.Database.Server.HttpServer;Debug;Request #  20: GET     -     0 ms - <default>  - 200 - /docs/?start=0&pageSize=12&noCache=-1965866337;
+2011-10-03 21:56:47.3242;Raven.Database.Server.HttpServer;Debug;Request #  21: GET     -     1 ms - <default>  - 200 - /terms/Raven/DocumentsByEntityName?field=Tag&fromValue=&pageSize=128&noCache=1795117835;
+2011-10-03 21:57:06.2998;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuiz' was not found;
+2011-10-03 21:57:06.2998;Raven.Database.Server.HttpServer;Debug;Request #  22: GET     -     1 ms - <default>  - 404 - /docs/Raven/Databases/DotNetQuiz;
+2011-10-03 21:57:12.7911;Raven.Database.DocumentDatabase;Debug;Putting a document with key: Raven/Databases/DotNetQuiz and etag ;
+2011-10-03 21:57:12.8571;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Inserted a new document with key 'Raven/Databases/DotNetQuiz', update: False, ;
+2011-10-03 21:57:12.8611;Raven.Database.Server.HttpServer;Debug;Request #  23: PUT     -   138 ms - <default>  - 201 - /docs/Raven/Databases/DotNetQuiz;
+2011-10-03 21:57:12.9041;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuiz' was found;
+2011-10-03 21:57:12.9251;Raven.Database.Indexing.AbstractIndexingExecuter;Debug;Indexing 1 documents for index: Raven/DocumentsByEntityName;
+2011-10-03 21:57:13.0111;Raven.Database.Indexing.Index.Indexing;Debug;Indexed 0 documents for Raven/DocumentsByEntityName;
+2011-10-03 21:57:13.0221;Raven.Database.Util.PortUtil;Info;Default port 8080 was not available, so using available port 8081;
+2011-10-03 21:57:13.0522;Raven.Database.Impl.DocumentCacher;Info;"MemoryCache Settings:
+  PhysicalMemoryLimit = 98
+  CacheMemoryLimit    = 1072693248
+  PollingInterval     = 00:02:00";
+2011-10-03 21:57:13.0522;Raven.Storage.Esent.TransactionalStorage;Info;"Esent Settings:
+  MaxVerPages      = 32768
+  CacheSizeMax     = 262144
+  DatabasePageSize = 4096";
+2011-10-03 21:57:14.1358;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuiz' was found;
+2011-10-03 21:57:14.8846;Raven.Database.DocumentDatabase;Debug;Delete a document with key: Raven/Backup/Status and etag ;
+2011-10-03 21:57:14.8846;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Backup/Status' was not found, and considered deleted;
+2011-10-03 21:57:14.9158;Raven.Database.Server.HttpServer;Debug;Request #  24: GET     -   797 ms - DotNetQuiz - 200 - /stats?noCache=232374028;
+2011-10-03 21:57:15.0094;Raven.Database.Storage.IndexDefinitionStorage;Info;"New index Raven%2fDocumentsByEntityName:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+where  Tag != null 
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.ForEntityNames.Add(null);
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			where Tag != null
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+where  Tag != null 
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.ForEntityNames.Add(null);
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			where Tag != null
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+";
+2011-10-03 21:57:15.0094;Raven.Database.Indexing.IndexStorage;Info;Creating index Raven/DocumentsByEntityName with encoded name Raven/DocumentsByEntityName;
+2011-10-03 21:57:15.0250;Raven.Database.Indexing.Index.Indexing;Debug;Creating index for Raven/DocumentsByEntityName;
+2011-10-03 21:57:15.0406;Raven.Database.Server.HttpServer;Debug;Request #  25: GET     - 2 153 ms - DotNetQuiz - 200 - /silverlight/ensureStartup?noCache=-1839204682;
+2011-10-03 21:57:17.2517;Raven.Database.Server.HttpServer;Debug;Request #  26: GET     -     0 ms - DotNetQuiz - 200 - /docs/?start=0&pageSize=12&noCache=-974537164;
+2011-10-03 21:57:17.2517;Raven.Database.Server.HttpServer;Debug;Request #  27: GET     -     2 ms - DotNetQuiz - 200 - /terms/Raven/DocumentsByEntityName?field=Tag&fromValue=&pageSize=128&noCache=-1447923504;
+2011-10-03 21:57:17.2517;Raven.Database.Server.HttpServer;Debug;Request #  28: GET     -     0 ms - DotNetQuiz - 200 - /silverlight/ensureStartup?noCache=1043915318;
+2011-10-03 21:57:17.2617;Raven.Database.Server.HttpServer;Debug;Request #  29: GET     -     1 ms - DotNetQuiz - 200 - /terms/Raven/DocumentsByEntityName?field=Tag&fromValue=&pageSize=128&noCache=734651690;
+2011-10-03 21:57:17.2617;Raven.Database.Server.HttpServer;Debug;Request #  30: GET     -     1 ms - DotNetQuiz - 200 - /docs/?start=0&pageSize=12&noCache=57710907;
+2011-10-03 21:57:21.6046;Raven.Database.Server.HttpServer;Debug;Request #  31: GET     -     0 ms - DotNetQuiz - 200 - /docs/?start=0&pageSize=12&noCache=1962562057;
+2011-10-03 21:57:21.6046;Raven.Database.Server.HttpServer;Debug;Request #  32: GET     -     1 ms - DotNetQuiz - 200 - /terms/Raven/DocumentsByEntityName?field=Tag&fromValue=&pageSize=128&noCache=-483615248;
+2011-10-03 22:31:35.0817;Raven.Database.Server.HttpServer;Debug;Request #  33: GET     -    40 ms - DotNetQuiz - 200 - /stats?noCache=615206014;
+2011-10-03 22:33:05.7635;Raven.Database.Indexing.WorkContext;Debug;Stopping background workers;
+2011-10-03 22:33:05.7845;Raven.Database.Indexing.WorkContext;Debug;Stopping background workers;

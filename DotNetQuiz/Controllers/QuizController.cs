@@ -36,7 +36,7 @@ namespace DotNetQuiz.Controllers
         }
 
         [HttpPost]
-        public ActionResult Answer(int question, int answer)
+        public ActionResult Answer(int question, int answer, int quizId)
         {
 
             return Json(new {correct = false, message = "Test message"});
@@ -58,6 +58,7 @@ namespace DotNetQuiz.Controllers
 
             var question = new Question()
                                {
+                                   QuestionId = 1,
                                    QuestionText = questionStr,
                                    AnswerOptions =
                                        new List<Tuple<int, string>> { answer1,answer2,asnwer3,answer4}
