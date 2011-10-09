@@ -73,6 +73,10 @@
     <Compile Include="QuizControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DotNetQuizDataAccess\DotNetQuizDataAccess.csproj">
+      <Project>{C597ABC3-F6B7-47C7-8003-BC0050C06EBD}</Project>
+      <Name>DotNetQuizDataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DotNetQuiz\DotNetQuiz.csproj">
       <Project>{B335E64D-FA38-4588-81F5-6E795A8A881B}</Project>
       <Name>DotNetQuiz</Name>

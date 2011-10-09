@@ -4,7 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
-using DotNetQuiz.Models;
+using DotNetQuizDataAccess.Models;
+
 
 namespace DotNetQuiz.Controllers
 {

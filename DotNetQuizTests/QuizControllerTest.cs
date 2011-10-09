@@ -1,7 +1,7 @@
 ﻿using System.Web.Helpers;
 using System.Web.Script.Serialization;
 using DotNetQuiz.Controllers;
-using DotNetQuiz.Models;
+using DotNetQuizDataAccess.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting.Web;
