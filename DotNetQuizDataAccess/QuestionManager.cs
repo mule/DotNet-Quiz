@@ -41,6 +41,7 @@ namespace DotNetQuizDataAccess
         {
             // Add the new entity to the repository.
             _repository.Add(entity);
+         
         }
 
         public static void Delete(Question entity)

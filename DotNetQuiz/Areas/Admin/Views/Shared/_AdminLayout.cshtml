@@ -26,15 +26,17 @@
 
     @RenderSection("AdditionalScripts")
 
-        @(Html.Telerik().StyleSheetRegistrar()
-                      .DefaultGroup(group => group
-                          .Add("telerik.examples.css")
-                          .Add("telerik.common.css")
-                          .Add("telerik." + Html.GetCurrentTheme() + ".css")
-                          .Add("telerik.rtl.css")
-                          .Combined(true)
-                          .Compress(true))
-                     )
+        @{
+
+            Html.Telerik().StyleSheetRegistrar()
+                .DefaultGroup(group => group
+                                           .Add("telerik.examples.css")
+                                           .Add("telerik.common.css")
+                                           .Add("telerik.sunset.css")
+                                           .Add("telerik.rtl.css")
+                                           .Combined(true)
+                                           .Compress(true));
+        }
 
 </head>
 <h2>DotNetQuiz Admin</h2>

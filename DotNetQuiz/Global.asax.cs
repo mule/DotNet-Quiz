@@ -54,7 +54,7 @@ namespace DotNetQuiz
                 () =>
                 {
                     var documentStore =
-new Raven.Client.Document.DocumentStore { Url = "http://localhost:8080" };
+new Raven.Client.Document.DocumentStore { Url = "http://localhost:8080", DefaultDatabase = "DotNetQuizTest"};
                     documentStore.Conventions.IdentityPartsSeparator = "-";
                     documentStore.Initialize();
 

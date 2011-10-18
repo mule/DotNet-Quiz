@@ -1,9 +1,38 @@
-﻿@{
+﻿@using DotNetQuiz.Areas.Admin.ViewModels
+@using Telerik.Web.Mvc.UI
+@{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    
 }
+
+@model QuestionsListViewModel 
+
+
+@section AdditionalScripts{}
+
 
 <div id="QuestionsList">
 
+@{
+    Html.Telerik().Grid(Model.Questions)
+        .Name("QuestionsGrid")
+        .Columns(columns =>
+                     {
+                         columns.Bound(o => o.QuestionId).Width(20);
+                         columns.Bound(o => o.QuestionText).Width(200);
+                     })
+        .DataBinding(dataBinding =>
+                         {
+
+                             dataBinding.Ajax().Select("AjaxBinding", "Grid");
+                         })
+        .Render();
+}
+
+
 
 </div>
+
+@section footer {}
+@section scripts{}

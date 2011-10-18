@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
+using DotNetQuiz.Areas.Admin.ViewModels;
 using DotNetQuizDataAccess.Models;
 
 
@@ -25,7 +26,7 @@ namespace DotNetQuiz.Controllers
             var answer4 = new Tuple<int, string>(4,
                                                  "Set the @ OutputCache directive's VaryByControl attribute to the ID of the GridView control.");
 
-            var question = new Question()
+            var question = new QuestionViewModel()
                                {
                                    QuestionText = questionStr,
                                    AnswerOptions =
@@ -57,7 +58,7 @@ namespace DotNetQuiz.Controllers
             var answer4 = new Tuple<int, string>(4,
                                                  "Set the @ OutputCache directive's VaryByControl attribute to the ID of the GridView control.");
 
-            var question = new Question()
+            var question = new QuestionViewModel()
                                {
                                    QuestionId = 1,
                                    QuestionText = questionStr,

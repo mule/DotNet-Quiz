@@ -9,8 +9,8 @@ namespace DotNetQuizDataAccess.Models
     {
         public int QuestionId { get; set; }
         public string QuestionText { get; set; }
-        public List<Tuple<int,string>> AnswerOptions { get; set; }
-        public int CorrectAnswer { get; set; }
+        public List<Tuple<int,string,bool>> AnswerOptions { get; set; }
+      
         
 
     }
