@@ -19,6 +19,7 @@ namespace DotNetQuiz.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var vm = new QuestionsListViewModel();
+            vm.LoadData();
             return View(vm);
         }
 
@@ -46,7 +47,7 @@ namespace DotNetQuiz.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            return View( new QuestionEditViewModel());
         } 
 
         //
@@ -74,7 +75,7 @@ namespace DotNetQuiz.Areas.Admin.Controllers
             List<string> messages = new List<string>();
             var val = validateQuestion(vm);
 
-
+            vm.Id = null;
             try
             {
     
@@ -84,6 +85,7 @@ namespace DotNetQuiz.Areas.Admin.Controllers
 
 
                     QuestionManager.Insert(question);
+                    UnitOfWork.Commit();
                    
                     messages.Add("Question created succesfully.");
                 }
@@ -180,7 +182,8 @@ namespace DotNetQuiz.Areas.Admin.Controllers
 
         private Question CreateQuestionFromViewModel(QuestionEditViewModel vm)
         {
-            Question q = new Question() {QuestionText = vm.QuestionText, QuestionId = vm.QuestionId};
+
+            Question q = new Question() {QuestionText = vm.QuestionText, Id = vm.Id, QuestionAnswerType =  vm.AnswerType};
 
                 int id = 1;
             q.AnswerOptions = new List<Tuple<int, string, bool>>();

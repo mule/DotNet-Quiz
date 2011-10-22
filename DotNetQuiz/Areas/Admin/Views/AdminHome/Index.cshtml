@@ -17,16 +17,19 @@
 @{
     Html.Telerik().Grid(Model.Questions)
         .Name("QuestionsGrid")
+        .DataKeys(dataKeys => dataKeys.Add(c => c.Id))
         .Columns(columns =>
                      {
-                         columns.Bound(o => o.QuestionId).Width(20);
-                         columns.Bound(o => o.QuestionText).Width(200);
+                         columns.Bound(o => o.Id).Width(20);
+                         columns.Bound(o => o.QuestionText);
+                         columns.Command(commands => commands.Select()).Title("Edit");
                      })
         .DataBinding(dataBinding =>
                          {
 
-                             dataBinding.Ajax().Select("AjaxBinding", "Grid");
+                             dataBinding.Ajax().Select("AjaxBinding", "AdminHome");
                          })
+        .Selectable()
         .Render();
 }
 

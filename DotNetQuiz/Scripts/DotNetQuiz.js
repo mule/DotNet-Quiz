@@ -2,11 +2,13 @@ function QuestionEditor() {
 
     var questionText = '';
     var answerOptions = new Array();
+    
 
     var me = this;
 
     this.QuestionText = questionText;
     this.AnswerOptions = answerOptions;
+    this.AnswerType = 0;
     
     
     
@@ -16,6 +18,7 @@ function QuestionEditor() {
         var questionTxtBox = $('#txtQuestion');
         var answerOptionsBox = $('#AnswerOptions');
         var answerOptionTemplate = $('#answerOptionEditTemplate');
+        var answerTypeDropDown = $('#AnswerType');
 
         wireEvents();
 
@@ -25,6 +28,8 @@ function QuestionEditor() {
         QuestionEditor.prototype.CreateQuestion = function () {
             getQuestionText();
             getAnswerOptions();
+            me.AnswerType = $(answerTypeDropDown).val();
+            
             sendQuestionToServer();
         };
 
@@ -77,7 +82,7 @@ function QuestionEditor() {
         $.ajax({
             url: "/Admin/AdminHome/CreateQuestion",
             type: "POST",
-            data: $.toDictionary({ QuestionText: me.QuestionText, AnswerOptions: me.AnswerOptions}),
+            data: $.toDictionary({ QuestionText: me.QuestionText, AnswerOptions: me.AnswerOptions, AnswerType: me.AnswerType}),
             datatype: "json",
             success: function (result) {
                 alert(result);

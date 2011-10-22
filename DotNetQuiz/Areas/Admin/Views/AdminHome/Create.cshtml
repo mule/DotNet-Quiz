@@ -4,58 +4,52 @@
     
 }
 
+@using DotNetQuiz.Areas.Admin.ViewModels
+@model QuestionEditViewModel
+           
 @section AdditionalScripts
 {
     <script type="text/javascript" src="@Url.Content("~/Scripts/DotNetQuiz.js")"></script>
-    <script src="@Url.Content("~/Scripts/jquery.tmpl.min.js")" type="text/javascript"></script>  
+    <script src="@Url.Content("~/Scripts/jquery.tmpl.min.js")" type="text/javascript"></script>
 }
-
-@using (Html.BeginForm("Create", "AdminHome")){
-
-    <div id="QuestionText">
-    <textarea id="txtQuestion">
+@using (Html.BeginForm("Create", "AdminHome"))
+{
+    <div id="QuestionInput">
+        <div id="QuestionText">
+            <textarea id="txtQuestion">
     
-    </textarea>    
-    </div>
-        <button id='btnAddAnswer'>Add anwswer</button>
-    <div id="AnswerOptions">
+    </textarea>
+        </div>
 
-
+        @Html.DropDownList("AnswerType",@Model.AnswerTypes,"Answertype:")
+        <button id='btnAddAnswer'>
+            Add anwswer</button>
+        <div id="AnswerOptions">
+        </div>
     </div>
-    
     <div id="CRUDControls">
-    <button id='btnCreateQuestion'>Create Question</button>
+        <button id='btnCreateQuestion'>
+            Create Question</button>
     </div>
     
 
-                                             }
- 
-
+}
 @section scripts{
-
-<script id="answerOptionEditTemplate" type="text/x-jquery-tmpl">
+    <script id="answerOptionEditTemplate" type="text/x-jquery-tmpl">
         <div  class="answerOption">
         <textarea  class="txtAnswerOption">
         </textarea>
         <input type='checkbox' class='cbxCorrect'>Correct answer</input>            
         <button class='removeAnswerBtn'>Remove</button>
         </div>
-</script>
+    </script>
+    <script type="text/javascript">
 
-<script type="text/javascript" >
-
-    var qEditor = new QuestionEditor();
+        var qEditor = new QuestionEditor();
 
 
-</script>
-
+    </script>
 }
-
 @section footer
 {
-    
 }
-
-
-
-

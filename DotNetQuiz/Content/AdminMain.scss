@@ -1,2 +1,22 @@
-﻿body {
+﻿
+#MainContent{
+width:100%;
+
+}
+
+#QuestionInput{
+margin: 20px;
+
+}
+#QuestionInput TextArea {
+width:300px;
+height: 300px;
+
+}
+
+#AnswerOptions TextArea{
+
+height: 150px;
+
+
 }

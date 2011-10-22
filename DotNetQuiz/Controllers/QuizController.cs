@@ -60,7 +60,7 @@ namespace DotNetQuiz.Controllers
 
             var question = new QuestionViewModel()
                                {
-                                   QuestionId = 1,
+                                   Id = "1",
                                    QuestionText = questionStr,
                                    AnswerOptions =
                                        new List<Tuple<int, string>> { answer1,answer2,asnwer3,answer4}

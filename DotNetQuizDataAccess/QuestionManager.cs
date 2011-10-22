@@ -20,10 +20,10 @@ namespace DotNetQuizDataAccess
 
         }
 
-        public static Question Load(int id)
+        public static Question Load(string id)
         {
 
-            return _repository.Single(u => u.QuestionId == id);
+            return _repository.Single(u => u.Id == id);
 
         }
 
