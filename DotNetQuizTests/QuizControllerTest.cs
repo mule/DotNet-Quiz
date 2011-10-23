@@ -1,4 +1,5 @@
-﻿using System.Web.Helpers;
+﻿using System.Diagnostics;
+using System.Web.Helpers;
 using System.Web.Script.Serialization;
 using DotNetQuiz.Controllers;
 using DotNetQuizDataAccess.Models;
@@ -103,11 +104,11 @@ namespace DotNetQuizTests
         {
             QuizController target = new QuizController(); 
             int question = 1;
-            int answer = 1;
+            var answers = new int[] {1};
             int quiz = 1;
 
 
-            var actual = target.Answer(question, answer,quiz) as JsonResult;
+            var actual = target.Answer(question, answers,quiz) as JsonResult;
             dynamic data = actual.Data;
 
            Assert.IsTrue(data.correct == false);
@@ -117,6 +118,29 @@ namespace DotNetQuizTests
 
 
 
+        }
+
+        /// <summary>
+        ///A test for NextQuestion
+        ///</summary>
+        // TODO: Ensure that the UrlToTest attribute specifies a URL to an ASP.NET page (for example,
+        // http://.../Default.aspx). This is necessary for the unit test to be executed on the web server,
+        // whether you are testing a page, web service, or a WCF service.
+        [TestMethod()]
+        [HostType("ASP.NET")]
+        [AspNetDevelopmentServerHost("D:\\projects\\DotNet-Quiz\\DotNetQuiz", "/")]
+        [UrlToTest("http://localhost:53311/")]
+        public void NextQuestionTest()
+        {
+            QuizController target = new QuizController(); 
+
+            var actual = target.NextQuestion() as JsonResult;
+           
+            dynamic data = actual.Data;
+
+
+            Assert.IsTrue(data.AnswerType == Question.AnswerType.MultipleChoice);
+     
         }
     }
 }

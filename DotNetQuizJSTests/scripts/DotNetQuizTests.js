@@ -32,6 +32,21 @@ test('CreateQuestionWithAnswerTest()', function () {
     ok(qEditor.AnswerOptions.length == 1,qEditor.AnswerOptions.toString());
 
 
+});
+
+test('GetQuestionTest()', function () {
+    stop();
+    var quiz = new Quiz();
+
+
+    quiz.Host = 'localhost:53311';
+
+
+    quiz.GetQuizStatus();
+    quiz.GetQuestionFromServer();
+    setTimeout()
+    ok(quiz.CurrentQuestion.AnswerOptions.length > 0);
+
 
 });
 

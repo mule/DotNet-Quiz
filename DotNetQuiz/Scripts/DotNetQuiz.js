@@ -98,6 +98,175 @@ function QuestionEditor() {
 }
 
 
+function Question() {
+
+    var id, questionText, answerType;
+    this.AnswerOptions = new Array();
+    this.Id = id;
+    this.QuestionText = questionText;
+    this.AnswerType = answerType;
+    
+   
+}
+
+
+function Quiz() {
+    var quizId;
+    var startTime;
+    var host = '';
+    //var currentQuestionId;
+
+    this.CurrentQuestion = new Question();
+    this.Host = host;
+    var me = this;
+
+    //page resouces
+    var answerBox = $('#answerBox');
+    var questionBox = $('#questionBox');
+    var txtQuestion = questionBox.find('#question');
+    var answerTemplate = $('#answerOptionsTemplate');
+    var multiChoiceAnswer = $('#answerOptionsTemplateMultiChoice');
+    var answerOptions = $('#answerOptions');
+    var btnAnswerQuestion = $('#btnAnswer');
+    var btnNextQuestion = $('#btnNextQuestion');
+
+    wireEvents();
+    
+    
+
+    Quiz.prototype.StartNewQuiz = function () {
+
+        $.ajax({
+            url: me.Host + "/Quiz/NewQuiz",
+            type: "POST",
+            datatype: "json",
+
+            success: function (result) {
+                quizId = result.QuizId;
+                me.startTime = result.StartTime;
+                me.GetQuestionFromServer();
+            }
+
+        });
+    };
+
+    Quiz.prototype.GetQuizStatus = function () {
+
+        var id = $.cookie('DotNetQuiz');
+
+        if (id != null) {
+
+            this.quizId = parseInt(id);
+
+            $.ajax({
+                url: me.Host + "/Quiz/QuizStatus",
+                type: "POST",
+                data: { quizId: me.quizId },
+                datatype: "json",
+                success: function (result) {
+                    me.startTime = result.StartTime;
+
+                    me.GetQuestionFromServer();
+                },
+                failure: function (result) {
+                    alert('Could not get Quiz status');
+                }
+            });
+        } else {
+            me.StartNewQuiz();
+        }
+    };
+
+
+    Quiz.prototype.AnswerQuestion = function () {
+
+        var answers = new Array();
+        $('.answer input:[checked=true]').each(function () {
+
+            var id = $(this).val();
+            answers.push(id);
+
+        });
+
+
+        $.ajax({
+            url: me.Host + "/Quiz/Answer",
+            type: "POST",
+            traditional: true,
+            data: { question: me.CurrentQuestion.Id, answers: answers, quizId: me.quizId },
+            dataType: "json",
+            success: function (result) {
+                $('#questionBox').hide();
+                var answer = $('#answerBox');
+                if (result.correct == false) {
+                    answer.find('#succesBox').text("Answer was incorrect");
+                    answer.find('#messageBox').text(result.message);
+                } else {
+                    answer.find('#succesBox').text("Answer was correct");
+                    answer.find('#messageBox').text(result.message);
+                }
+                answer.show();
+
+            }
+        });
+    };
+
+
+
+    Quiz.prototype.GetQuestionFromServer = function() {
+
+        $.ajax({
+                url: me.Host +  "/Quiz/NextQuestion",
+                type: "POST",
+                data: quizId,
+                dataType: "json",
+
+                success: function(result) {
+                    
+                    me.CurrentQuestion.Id = result.Id;
+                    me.CurrentQuestion.QuestionText = result.QuestionText;
+                    me.CurrentQuestion.AnswerOptions = result.AnswerOptions;
+                    me.CurrentQuestion.AnswerType = result.AnswerType;
+                    me.RefreshQuestion();
+
+                }
+
+                //TODO: Add failure handling
+            });
+        };
+
+        Quiz.prototype.RefreshQuestion = function () {
+
+            if (answerBox != null && txtQuestion != null && answerOptions != null && answerTemplate != null && questionBox != null && multiChoiceAnswer != null) {
+                answerBox.hide();
+                txtQuestion.text(me.CurrentQuestion.QuestionText);
+                answerOptions.empty();
+
+                if (me.CurrentQuestion.AnswerType == 1)
+                    answerTemplate.tmpl(me.CurrentQuestion.AnswerOptions).appendTo(answerOptions);
+
+                if (me.CurrentQuestion.AnswerType == 2)
+                    multiChoiceAnswer.tmpl(me.CurrentQuestion.AnswerOptions).appendTo(answerOptions);
+
+                questionBox.show();
+            }
+            //TODO: Log error if resources not found
+
+        };
+    
+    function wireEvents() {
+        
+        if(btnAnswerQuestion!=null && btnNextQuestion!=null) {
+            btnAnswerQuestion.bind('click', function() { me.AnswerQuestion(); return false; });
+            btnNextQuestion.bind('click', function() { me.GetQuestionFromServer(); return false; });
+        }
+
+
+    }
+
+}
+
+
 
 
 

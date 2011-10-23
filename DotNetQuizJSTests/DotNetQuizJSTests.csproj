@@ -55,6 +55,7 @@
     <Content Include="scripts\DotNetQuizTests.js" />
     <Content Include="scripts\DotNetQuiz.js" />
     <Content Include="scripts\jquery-1.5.1.min.js" />
+    <Content Include="scripts\jquery.cookie.js" />
     <Content Include="scripts\jquery.tmpl.min.js" />
     <Content Include="scripts\qunit.css" />
     <Content Include="scripts\qunit.js" />

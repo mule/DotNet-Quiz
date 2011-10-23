@@ -30,7 +30,8 @@ namespace DotNetQuiz.Controllers
                                {
                                    QuestionText = questionStr,
                                    AnswerOptions =
-                                       new List<Tuple<int, string>> { answer1,answer2,asnwer3,answer4}
+                                       new List<Tuple<int, string>> { answer1,answer2,asnwer3,answer4},
+                                       AnswerType = Question.AnswerType.SingleChoice
 
                                };
 
@@ -38,7 +39,7 @@ namespace DotNetQuiz.Controllers
         }
 
         [HttpPost]
-        public ActionResult Answer(int question, int answer, int quizId)
+        public ActionResult Answer(int question, ICollection<int> answers, int quizId)
         {
 
             return Json(new {correct = false, message = "Test message"});
@@ -63,7 +64,9 @@ namespace DotNetQuiz.Controllers
                                    Id = "1",
                                    QuestionText = questionStr,
                                    AnswerOptions =
-                                       new List<Tuple<int, string>> { answer1,answer2,asnwer3,answer4}
+                                       new List<Tuple<int, string>> { answer1,answer2,asnwer3,answer4},
+                                       AnswerType = Question.AnswerType.MultipleChoice
+
 
                                };
 
@@ -100,6 +103,7 @@ namespace DotNetQuiz.Controllers
             return Json(quiz);
 
         }
+
 
     }
 }
