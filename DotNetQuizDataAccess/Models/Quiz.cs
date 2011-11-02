@@ -8,9 +8,10 @@ namespace DotNetQuizDataAccess.Models
     public class Quiz
     {
 
-        public int QuizId { get; set; }
+        public string Id { get; set; }
         public DateTime StartTime { get; set; }
-        public IEnumerable<Tuple<int,int>> Answers { get; set; }
+        public IEnumerable<Question> Questions { get; set; }
+        public IEnumerable<Tuple<string,int>> Answers { get; set; }
 
     }
 }

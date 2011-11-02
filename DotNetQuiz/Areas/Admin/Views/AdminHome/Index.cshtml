@@ -22,14 +22,17 @@
                      {
                          columns.Bound(o => o.Id).Width(20);
                          columns.Bound(o => o.QuestionText);
-                         columns.Command(commands => commands.Select()).Title("Edit");
+                         columns.Command(commands => {
+                                                         commands.Edit();
+                                                         commands.Delete();
+
+                                                     });
                      })
         .DataBinding(dataBinding =>
                          {
 
                              dataBinding.Ajax().Select("AjaxBinding", "AdminHome");
                          })
-        .Selectable()
         .Render();
 }
 

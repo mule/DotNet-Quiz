@@ -87,7 +87,7 @@ namespace DotNetQuiz.Controllers
 
             }
 
-            var quiz = new Quiz() {QuizId = 1, StartTime = DateTime.Now};
+            var quiz = new Quiz() {Id = "1", StartTime = DateTime.Now};
 
 
             return Json(quiz);
@@ -95,10 +95,10 @@ namespace DotNetQuiz.Controllers
         }
 
         [HttpPost]
-        public ActionResult QuizStatus(int quizId)
+        public ActionResult QuizStatus(string quizId)
         {
 
-            var quiz = new Quiz() { QuizId = 1, StartTime = DateTime.Now };
+            var quiz = new Quiz() { Id = quizId, StartTime = DateTime.Now };
 
             return Json(quiz);
 

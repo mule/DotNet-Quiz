@@ -19,6 +19,7 @@ function QuestionEditor() {
         var answerOptionsBox = $('#AnswerOptions');
         var answerOptionTemplate = $('#answerOptionEditTemplate');
         var answerTypeDropDown = $('#AnswerType');
+        var btnNext = $('#btnNext');
 
         wireEvents();
 
@@ -82,10 +83,13 @@ function QuestionEditor() {
         $.ajax({
             url: "/Admin/AdminHome/CreateQuestion",
             type: "POST",
-            data: $.toDictionary({ QuestionText: me.QuestionText, AnswerOptions: me.AnswerOptions, AnswerType: me.AnswerType}),
+            data: $.toDictionary({ QuestionText: me.QuestionText, AnswerOptions: me.AnswerOptions, AnswerType: me.AnswerType }),
             datatype: "json",
             success: function (result) {
-                alert(result);
+
+                if (result.item1 == true) {
+                    alert(result.item2);     
+                }
 
             },
             failure: function (result) {
