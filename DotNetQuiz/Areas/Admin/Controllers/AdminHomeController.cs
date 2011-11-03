@@ -134,22 +134,40 @@ namespace DotNetQuiz.Areas.Admin.Controllers
 
         //
         // GET: /Admin/QuestionAdmin/Delete/5
- 
-        public ActionResult Delete(int id)
+
+        [GridAction]
+        public ActionResult Delete(string id)
         {
-            return View();
+            var question = QuestionManager.Load(id);
+
+            if (question != null)
+            {
+                QuestionManager.Delete(question);
+                UnitOfWork.Commit();
+            }
+
+            //TODO: Add errohandling here
+
+
+            return RedirectToAction("Index", "AdminHome");
         }
 
         //
         // POST: /Admin/QuestionAdmin/Delete/5
 
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(string id, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
- 
+                var question = QuestionManager.Load(id);
+
+                if (question != null)
+                {
+                    QuestionManager.Delete(question);
+                    UnitOfWork.Commit();
+                }
+
                 return RedirectToAction("Index");
             }
             catch

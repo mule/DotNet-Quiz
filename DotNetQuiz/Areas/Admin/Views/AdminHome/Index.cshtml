@@ -18,21 +18,19 @@
     Html.Telerik().Grid(Model.Questions)
         .Name("QuestionsGrid")
         .DataKeys(dataKeys => dataKeys.Add(c => c.Id))
+        .DataBinding(dataBinding => dataBinding.Server().Delete("Delete", "AdminHome"))
         .Columns(columns =>
                      {
                          columns.Bound(o => o.Id).Width(20);
                          columns.Bound(o => o.QuestionText);
                          columns.Command(commands => {
-                                                         commands.Edit();
+                                                        
                                                          commands.Delete();
 
                                                      });
                      })
-        .DataBinding(dataBinding =>
-                         {
-
-                             dataBinding.Ajax().Select("AjaxBinding", "AdminHome");
-                         })
+        
+         .Editable(editting => editting.Mode(GridEditMode.InLine))
         .Render();
 }
 
