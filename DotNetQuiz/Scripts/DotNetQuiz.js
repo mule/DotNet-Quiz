@@ -87,8 +87,9 @@ function QuestionEditor() {
             datatype: "json",
             success: function (result) {
 
-                if (result.item1 == true) {
-                    alert(result.item2);     
+                if (result.Item1 == true) {
+                    alert(result.Item2);
+                    clearQuestionFields();
                 }
 
             },
@@ -99,6 +100,12 @@ function QuestionEditor() {
 
     }
 
+    function clearQuestionFields() {
+        questionTxtBox.val('');
+        $('.answerOption').remove();
+
+
+    }
 }
 
 

@@ -77,21 +77,32 @@ function QuestionEditor() {
     }
 
 
-    function sendQuestionToServer() {
+    function sendCreateRequestServer() {
 
         $.ajax({
             url: "/Admin/AdminHome/CreateQuestion",
             type: "POST",
-            data: $.toDictionary({ QuestionText: me.QuestionText, AnswerOptions: me.AnswerOptions, AnswerType: me.AnswerType}),
+            data: $.toDictionary({ QuestionText: me.QuestionText, AnswerOptions: me.AnswerOptions, AnswerType: me.AnswerType }),
             datatype: "json",
             success: function (result) {
-                alert(result);
+                if (result.Item1 == true) {
+                    clearQuestionFields();
+                    
+                }
+
 
             },
             failure: function (result) {
                 alert(result);
             }
         });
+
+    }
+    
+    function clearQuestionFields() {
+        questionTxtBox.text = '';
+        $('.answerOption').remove();
+
 
     }
 

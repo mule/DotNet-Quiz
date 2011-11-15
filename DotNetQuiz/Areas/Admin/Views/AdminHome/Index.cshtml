@@ -14,29 +14,30 @@
 
 <div id="QuestionsList">
 
-@{
-    Html.Telerik().Grid(Model.Questions)
-        .Name("QuestionsGrid")
-        .DataKeys(dataKeys => dataKeys.Add(c => c.Id))
-        .DataBinding(dataBinding => dataBinding.Server().Delete("Delete", "AdminHome"))
-        .Columns(columns =>
-                     {
-                         columns.Bound(o => o.Id).Width(20);
-                         columns.Bound(o => o.QuestionText);
-                         columns.Command(commands => {
+    @{
+        Html.Telerik().Grid(Model.Questions)
+            .Name("QuestionsGrid")
+            .DataKeys(dataKeys => dataKeys.Add(c => c.Id))
+            .DataBinding(dataBinding => dataBinding.Server().Delete("Delete", "AdminHome"))
+            .Columns(columns =>
+                         {
+                             columns.Bound(o => o.Id).Width(20);
+                             columns.Bound(o => o.QuestionText);
+                             columns.Command(commands => {
                                                         
-                                                         commands.Delete();
+                                                             commands.Delete();
 
-                                                     });
-                     })
+                             });
+                         })
         
-         .Editable(editting => editting.Mode(GridEditMode.InLine))
-        .Render();
-}
+            .Editable(editting => editting.Mode(GridEditMode.InLine))
+            .Render();
+    }
 
 
 
 </div>
+<div> @Html.ActionLink("Create question","Create","AdminHome")</div>
 
 @section footer {}
 @section scripts{}

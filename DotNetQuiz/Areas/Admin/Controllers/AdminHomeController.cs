@@ -34,13 +34,7 @@ namespace DotNetQuiz.Areas.Admin.Controllers
 
         }
 
-        //
-        // GET: /Admin/QuestionAdmin/Details/5
 
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
         //
         // GET: /Admin/QuestionAdmin/Create
@@ -106,31 +100,9 @@ namespace DotNetQuiz.Areas.Admin.Controllers
 
         }
         
-        //
-        // GET: /Admin/QuestionAdmin/Edit/5
- 
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
-        //
-        // POST: /Admin/QuestionAdmin/Edit/5
 
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
- 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+
 
         //
         // GET: /Admin/QuestionAdmin/Delete/5
@@ -152,29 +124,7 @@ namespace DotNetQuiz.Areas.Admin.Controllers
             return RedirectToAction("Index", "AdminHome");
         }
 
-        //
-        // POST: /Admin/QuestionAdmin/Delete/5
 
-        [HttpPost]
-        public ActionResult Delete(string id, FormCollection collection)
-        {
-            try
-            {
-                var question = QuestionManager.Load(id);
-
-                if (question != null)
-                {
-                    QuestionManager.Delete(question);
-                    UnitOfWork.Commit();
-                }
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
 
         private Tuple<bool,string> validateQuestion(QuestionEditViewModel vm)
@@ -182,13 +132,16 @@ namespace DotNetQuiz.Areas.Admin.Controllers
             if(String.IsNullOrWhiteSpace(vm.QuestionText))
                 return new Tuple<bool, string>(false,"Question text is empty");
 
+            if(vm.AnswerOptions==null)
+                return  new Tuple<bool, string>(false,"Question must have at least 2 answer options");
+
             if(vm.AnswerOptions.Count<2)
                 return new Tuple<bool, string>(false,"You need 2 or more answer options");
 
-            if(vm.AnswerOptions.Where(ans=>ans.Correct==true).Count() ==0)
+            if(!vm.AnswerOptions.Any(ans => ans.Correct))
                 return new Tuple<bool, string>(false, "At least one answer needs to be correct");
 
-            if(vm.AnswerOptions.Where(ans=>String.IsNullOrWhiteSpace(ans.AnswerText)==true).Count()>0)
+            if(vm.AnswerOptions.Count(ans => String.IsNullOrWhiteSpace(ans.AnswerText)==true)>0)
                 return new Tuple<bool, string>(false,"Question cannot contain empty answers");
 
 
