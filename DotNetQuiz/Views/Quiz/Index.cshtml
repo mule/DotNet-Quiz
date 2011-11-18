@@ -1,15 +1,13 @@
 ﻿@{
-    ViewBag.Title = "Index.cshtml";
-    Layout = "~/Views/Shared/_NewLayout.cshtml";
+    ViewBag.Title = "Quiz";
+    Layout = "~/Views/Shared/_Layout.cshtml";
       
 }
 
 
 
 @section AdditionalScripts{
-<script src="@Url.Content("~/Scripts/jquery.tmpl.min.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/jquery.cookie.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/DotNetQuiz.js")" type="text/javascript"></script>
+
 
 
 }
@@ -41,7 +39,11 @@
 @section scripts
 {
 
-<script id="answerOptionsTemplate" type="text/x-jquery-tmpl">
+<script src="@Url.Content("~/Scripts/jquery.tmpl.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.cookie.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/DotNetQuiz.js")" type="text/javascript"></script>
+
+    <script id="answerOptionsTemplate" type="text/x-jquery-tmpl">
 
         <div class="answer">
             <input type="radio" value=${Item1} name="Answer" id="Answer"> ${Item2}

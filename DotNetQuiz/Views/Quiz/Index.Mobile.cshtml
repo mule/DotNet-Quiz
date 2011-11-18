@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Quiz";
+    Layout = "~/Views/Shared/_Layout.Mobile.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div data-role="collapsible" data-collapsed="false">
+        <h3>Question</h3>
+        <section id="questionBox">
+            <div id="question">
+            </div>
+
+
+            <div data-role="fieldcontain">
+                <fieldset id="answerOptions" data-role="controlgroup">
+                    <legend>Answer options:</legend>
+       
+                </fieldset>
+            </div>
+            <div id="answerBtnBox">
+                <input id="btnAnswer" type="button" value="Answer" />
+            </div>
+        </section>
+
+    </div>
+
+    <section id="answerBox" style="display: none">
+        <div id="succesBox"></div>
+        <div id="messageBox"></div>
+        <div>
+            <input type="button" id="btnNextQuestion" value="Next question"/>
+        </div>
+    </section>
+}
+@section scripts
+{<a href="../Shared/_ViewSwitcher.cshtml">../Shared/_ViewSwitcher.cshtml</a>
+    <script src="@Url.Content("~/Scripts/jquery.tmpl.min.js")" type="text/javascript"> </script>
+    <script src="@Url.Content("~/Scripts/jquery.cookie.js")" type="text/javascript"> </script>
+    <script src="@Url.Content("~/Scripts/DotNetQuiz.js")" type="text/javascript"> </script>
+    <script id="answerOptionsTemplate" type="text/x-jquery-tmpl">
+
+        <div class="answer">
+      
+            <input type="radio" value=${Item1} name=${Item1} id=${Item1}> 
+            <label for=${Item1} >${Item2}</label>
+        </div>
+    </script>
+    <script id="answerOptionsTemplateMultiChoice" type="text/x-jquery-tmpl">
+
+        <div class="answer">         
+            <input type="checkbox" value=${Item1} name=${Item1} id=${Item1}> 
+            <label for=${Item1} >${Item2}</label>
+        </div>
+    </script>
+    <script type="text/javascript">
+
+
+        var quiz = new Quiz();
+
+        $('#DotNetQuizPage').live('pageinit', function(event) {
+            quiz.GetQuizStatus();
+        });
+    
+    </script>
+}

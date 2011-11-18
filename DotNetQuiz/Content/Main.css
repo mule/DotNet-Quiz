@@ -1,51 +1,53 @@
-header, article, footer {
-  display: -webkit-box;
-  display: -moz-box;
-  display: box;
-  width: 100%; }
+@media only screen and (max-width: 480px) {
+  header, article, footer {
+    display: -webkit-box;
+    display: -moz-box;
+    width: 100%; }
 
-#main {
-  width: 100%;
-  background: cyan; }
+  #main {
+    width: 480px;
+    background: cyan; }
 
-.button {
-  width: 20 px;
-  height: 20 px;
-  margin: 10px;
-  padding: 30px;
-  background: black;
-  foreground: white; }
+  .button {
+    width: 20 px;
+    height: 20 px;
+    margin: 10px;
+    padding: 30px;
+    background: black;
+    foreground: white; }
 
-.centerbox {
-  /* basic styling */
-  font-size: 14px;
-  border: 1px solid #555;
-  background: #CFC;
-  /* flexbox, por favor */
-  -webkit-box-orient: horizontal;
-  -webkit-box-pack: center;
-  -webkit-box-align: center;
-  -moz-box-orient: horizontal;
-  -moz-box-pack: center;
-  -moz-box-align: center;
-  box-orient: horizontal;
-  box-pack: center;
-  box-align: center; }
+  .centerbox {
+    /* basic styling */
+    font-size: 14px;
+    border: 1px solid #555;
+    background: #CFC;
+    /* flexbox, por favor */
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    -moz-box-orient: horizontal;
+    -moz-box-pack: center;
+    -moz-box-align: center;
+    box-orient: horizontal;
+    box-pack: center;
+    box-align: center; }
 
-#quizBox {
-  margin: 10px;
-  padding: 10px;
-  background: blue; }
+  #quizBox {
+    margin: 10px;
+    padding: 10px;
+    background: blue; }
 
-#mainNav {
-  width: 300px;
-  margin: 20px;
-  padding: 5px; }
+  #mainNav {
+    width: 300px;
+    margin: 20px;
+    padding: 5px; }
 
-#questionBox {
-  width: 300px;
-  margin: 20px;
-  padding: 5px; }
+  #questionBox {
+    width: 80em;
+    margin: 1em;
+    padding: 5em; }
 
-#answerBox, #question, #answerOptions {
-  margin: 10px; }
+  #answerBox, #question, #answerOptions {
+    margin: 10px; } }
+.answer {
+  width: 30em; }

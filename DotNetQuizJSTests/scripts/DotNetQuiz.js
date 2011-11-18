@@ -2,17 +2,12 @@ function QuestionEditor() {
 
     var questionText = '';
     var answerOptions = new Array();
-    
-
+   
     var me = this;
 
     this.QuestionText = questionText;
     this.AnswerOptions = answerOptions;
     this.AnswerType = 0;
-    
-    
-    
-
     
         //Find needed resources from html
         var questionTxtBox = $('#txtQuestion');
@@ -21,9 +16,6 @@ function QuestionEditor() {
         var answerTypeDropDown = $('#AnswerType');
 
         wireEvents();
-
-
-
 
         QuestionEditor.prototype.CreateQuestion = function () {
             getQuestionText();
