@@ -54,7 +54,7 @@
     <Compile Include="Models\Quiz.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuestionManager.cs" />
-    <Compile Include="QuizManager.cs" />
+    <Compile Include="Models\QuizManager.cs" />
     <Compile Include="RavenRepository.cs" />
     <Compile Include="RavenUnitOfWork.cs" />
     <Compile Include="RavenUnitOfWorkFactory.cs" />

@@ -38,7 +38,7 @@
     <script src="@Url.Content("~/Scripts/jquery.tmpl.min.js")" type="text/javascript"> </script>
     <script src="@Url.Content("~/Scripts/jquery.cookie.js")" type="text/javascript"> </script>
     <script src="@Url.Content("~/Scripts/DotNetQuiz.js")" type="text/javascript"> </script>
-    <script id="answerOptionsTemplate" type="text/x-jquery-tmpl">
+        <script id="answerOptionsTemplate" type="text/x-jquery-tmpl">
 
         <div class="answer">
       
@@ -58,9 +58,17 @@
 
         var quiz = new Quiz();
 
-        $('#DotNetQuizPage').live('pageinit', function(event) {
+        $('#DotNetQuizPage').live('pageinit', function() {
             quiz.GetQuizStatus();
         });
     
+    </script>
+    <script type="text/x-jquery-tmpl" id="MainMenuTemplate">
+  <ul data-role="listview">
+
+    <li>@Html.ActionLink("Take a quick quiz","Index","Quiz")</li>
+
+</ul>    
+
     </script>
 }

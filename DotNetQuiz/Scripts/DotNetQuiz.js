@@ -111,11 +111,15 @@ function QuestionEditor() {
 
 function Question() {
 
-    var id, questionText, answerType;
+    var id, questionText, answerType, answer;
     this.AnswerOptions = new Array();
     this.Id = id;
     this.QuestionText = questionText;
     this.AnswerType = answerType;
+    this.Answer = answer;
+    
+
+    
     
    
 }
@@ -125,9 +129,12 @@ function Quiz() {
     var quizId;
     var startTime;
     var host = '';
+    var completed;
+    this.Questions = new Array();
+    
     //var currentQuestionId;
 
-    this.CurrentQuestion = new Question();
+    this.CurrentQuestion = 0; //TODO: Add question index tracking
     this.Host = host;
     var me = this;
 
@@ -137,13 +144,15 @@ function Quiz() {
     var txtQuestion = questionBox.find('#question');
     var answerTemplate = $('#answerOptionsTemplate');
     var multiChoiceAnswer = $('#answerOptionsTemplateMultiChoice');
+    var mainMenuTemplate = $('#MainMenuTemplate');
+    var mainContent = $('#MainContent');
     var answerOptions = $('#answerOptions');
     var btnAnswerQuestion = $('#btnAnswer');
     var btnNextQuestion = $('#btnNextQuestion');
 
     wireEvents();
-    
-    
+
+
 
     Quiz.prototype.StartNewQuiz = function () {
 
@@ -153,9 +162,8 @@ function Quiz() {
             datatype: "json",
 
             success: function (result) {
-                quizId = result.QuizId;
-                me.startTime = result.StartTime;
-                me.GetQuestionFromServer();
+                updateQuizFromServerAnswer(result);
+                showQuestion(0); 
             }
 
         });
@@ -175,9 +183,40 @@ function Quiz() {
                 data: { quizId: me.quizId },
                 datatype: "json",
                 success: function (result) {
-                    me.startTime = result.StartTime;
 
-                    me.GetQuestionFromServer();
+                    if (result == '') {
+                        me.StartNewQuiz();
+                        return;
+
+                    }
+
+                    if (result.Completed) {
+                        showResultsView();
+                        return;
+                    }
+                    
+
+
+                    updateQuizFromServerAnswer(result);
+
+
+
+                    //                    for (var q in result.Questions) {
+                    //                        var question = new Question();
+                    //                        question.QuestionText = q.QuestionText;
+                    //                        question.AnswerType = q.QuestionAnswerType;
+                    //                        question.Id = q.Id;
+                    //                        question.AnswerOptions = q.AnswerOptions;
+                    //                    }
+
+
+
+                    if (completed == true) {
+                        showResultsView();
+                    }
+                    //                   else {
+                    //                        me.GetQuestionFromServer(); //TODO: Change to show next unanswered question
+                    //                    }
                 },
                 failure: function (result) {
                     alert('Could not get Quiz status');
@@ -204,7 +243,7 @@ function Quiz() {
             url: me.Host + "/Quiz/Answer",
             type: "POST",
             traditional: true,
-            data: { question: me.CurrentQuestion.Id, answers: answers, quizId: me.quizId },
+            data: { question: me.CurrentQuestion, answers: answers, quizId: me.quizId },
             dataType: "json",
             success: function (result) {
                 $('#questionBox').hide();
@@ -223,31 +262,41 @@ function Quiz() {
     };
 
 
+   
+    Quiz.prototype.GetQuestionFromServer = function () {
 
-    Quiz.prototype.GetQuestionFromServer = function() {
+    //TODO: Remove this function, questions are now loaded with the quiz status check or when starting a new quiz
 
         $.ajax({
-                url: me.Host +  "/Quiz/NextQuestion",
-                type: "POST",
-                data: quizId,
-                dataType: "json",
+            url: me.Host + "/Quiz/NextQuestion",
+            type: "POST",
+            data: quizId,
+            dataType: "json",
 
-                success: function(result) {
-                    
+            success: function (result) {
+
+                if (result != null) {
                     me.CurrentQuestion.Id = result.Id;
                     me.CurrentQuestion.QuestionText = result.QuestionText;
                     me.CurrentQuestion.AnswerOptions = result.AnswerOptions;
                     me.CurrentQuestion.AnswerType = result.AnswerType;
                     me.RefreshQuestion();
+                } else {
+
 
                 }
 
-                //TODO: Add failure handling
-            });
-        };
+
+
+            }
+
+            //TODO: Add failure handling
+        });
+    };
 
         Quiz.prototype.RefreshQuestion = function () {
 
+        //TODO: Remove, replaced with showNextQuestion()
             if (answerBox != null && txtQuestion != null && answerOptions != null && answerTemplate != null && questionBox != null && multiChoiceAnswer != null) {
                 answerBox.hide();
                 txtQuestion.text(me.CurrentQuestion.QuestionText);
@@ -273,6 +322,47 @@ function Quiz() {
         }
 
 
+    }
+
+    function gotoMainMenu() {
+        me.mainContent.empty();
+        me.mainMenuTemplate.tmpl().appendTo(mainContent);
+
+
+    }
+    
+    function showResultsView() {
+        me.mainContent.empty();
+
+    }
+
+
+    function updateQuizFromServerAnswer(answer) {
+        me.quizId = answer.Id;
+        me.startTime = answer.StartTime;
+        me.completed = answer.Completed;
+        me.Questions = answer.Questions;
+    }
+
+    function showQuestion(questionIndex) {
+
+        if (answerBox != null && txtQuestion != null && answerOptions != null && answerTemplate != null && questionBox != null && multiChoiceAnswer != null) {
+            answerBox.hide();
+            txtQuestion.text(me.Questions[questionIndex].QuestionText);
+            answerOptions.empty();
+
+            if (me.Questions[questionIndex].AnswerType == 1)
+                answerTemplate.tmpl(me.Questions[questionIndex].AnswerOptions).appendTo(answerOptions);
+
+            if (me.Questions[questionIndex].AnswerType == 2)
+                multiChoiceAnswer.tmpl(me.Questions[questionIndex].AnswerOptions).appendTo(answerOptions);
+
+            questionBox.show();
+        }
+        //TODO: Log error if resources not found
+        
+
+       
     }
 
 }
