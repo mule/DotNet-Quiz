@@ -59,7 +59,7 @@ namespace DotNetQuiz.Controllers
 
           
                 
-            return Json(new { correct = quiz.CheckAnswer(questionIndx,answers), message = "Test message", nextQuestionIndx = quiz.GetNextQuestionIndex() });
+            return Json(new { correct = quiz.CheckAnswer(questionIndx,answers), message = "Test message", nextQuestionIndx = quiz.NextQuestionIndex, completed = quiz.Completed, error = false });
 
         }
 
@@ -146,7 +146,22 @@ namespace DotNetQuiz.Controllers
                 return null;
 
            
-            return Json(new {Completed = quiz.Completed, NextQuestion = quiz.GetNextQuestionIndex()});
+            return Json(new {Completed = quiz.Completed, NextQuestion = quiz.NextQuestionIndex});
+
+        }
+
+        [HttpPost]
+        public ActionResult Results(string quizId)
+        {
+
+            var quiz = QuizManager.Load(quizId);
+
+            if (quiz == null)
+                return Json(new {error = true, message = "quiz not found"});
+
+
+            return Json(new {correctAnswers = quiz.CorrectlyAnsweredQuestions.Count(), total = quiz.Questions.Count()});
+
 
         }
 

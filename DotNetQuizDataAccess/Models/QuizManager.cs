@@ -26,15 +26,6 @@ namespace DotNetQuizDataAccess
 
             var quiz =  _repository.Single(u => u.Id == id);
 
-            if (quiz == null)
-                return null;
-
-            if (checkCompletionStatus(ref quiz))
-            {
-                Insert(quiz);
-
-                UnitOfWork.Commit();
-            }
 
             return quiz;
 
@@ -98,24 +89,24 @@ namespace DotNetQuizDataAccess
 
        }
 
-       /// <summary>
-       /// Checks if quiz completion status needs to be changed.
-       /// </summary>
-       /// <param name="quiz"></param>
-       /// returns true if quiz state has changed.
-       /// <returns></returns>
-       private static bool checkCompletionStatus(ref Quiz quiz)
-       {
+       ///// <summary>
+       ///// Checks if quiz completion status needs to be changed.
+       ///// </summary>
+       ///// <param name="quiz"></param>
+       ///// returns true if quiz state has changed.
+       ///// <returns></returns>
+       //private static bool checkCompletionStatus(ref Quiz quiz)
+       //{
 
-           if (quiz.Completed)
-               return false;
+       //    if (quiz.Completed)
+       //        return false;
 
-           if (quiz.Answers.Count == quiz.Questions.Count)
-               quiz.Completed = true;
+       //    if (quiz.Answers.Count == quiz.Questions.Count)
+       //        quiz.Completed = true;
 
-           return true;
+       //    return true;
 
-       }
+       //}
 
        
        

@@ -117,11 +117,6 @@ function Question() {
     this.QuestionText = questionText;
     this.AnswerType = answerType;
     this.Answer = answer;
-    
-
-    
-    
-   
 }
 
 
@@ -136,6 +131,7 @@ function Quiz() {
 
     this.CurrentQuestion = 0; //TODO: Add question index tracking
     this.Host = host;
+    this.Completed = completed;
     var me = this;
 
     //page resouces
@@ -149,6 +145,7 @@ function Quiz() {
     var answerOptions = $('#answerOptions');
     var btnAnswerQuestion = $('#btnAnswer');
     var btnNextQuestion = $('#btnNextQuestion');
+    var resultsTemplate = $('#ResultsViewTemplate');
 
     wireEvents();
 
@@ -243,20 +240,29 @@ function Quiz() {
             url: me.Host + "/Quiz/Answer",
             type: "POST",
             traditional: true,
-            data: { question: me.CurrentQuestion, answers: answers, quizId: me.quizId },
+            data: { questionIndx: me.CurrentQuestion, answers: answers, quizId: me.quizId },
             dataType: "json",
             success: function (result) {
-                $('#questionBox').hide();
-                var answer = $('#answerBox');
-                if (result.correct == false) {
-                    answer.find('#succesBox').text("Answer was incorrect");
-                    answer.find('#messageBox').text(result.message);
-                } else {
-                    answer.find('#succesBox').text("Answer was correct");
-                    answer.find('#messageBox').text(result.message);
-                }
-                answer.show();
 
+                if (result.error == false) {
+
+                    me.CurrentQuestion = result.nextQuestionIndx;
+                    me.Completed = result.completed;
+
+                    $('#questionBox').hide();
+                    var answer = $('#answerBox');
+                    if (result.correct == false) {
+                        answer.find('#succesBox').text("Answer was incorrect");
+                        answer.find('#messageBox').text(result.message);
+                    } else {
+                        answer.find('#succesBox').text("Answer was correct");
+                        answer.find('#messageBox').text(result.message);
+                    }
+   
+                    answer.show();
+                }
+
+                //TODO: Add client error handling here
             }
         });
     };
@@ -318,22 +324,44 @@ function Quiz() {
         
         if(btnAnswerQuestion!=null && btnNextQuestion!=null) {
             btnAnswerQuestion.bind('click', function() { me.AnswerQuestion(); return false; });
-            btnNextQuestion.bind('click', function() { me.GetQuestionFromServer(); return false; });
+            btnNextQuestion.bind('click', function() { showNext(); return false; });
         }
 
 
     }
 
-    function gotoMainMenu() {
+    function showMainMenu() {
         me.mainContent.empty();
         me.mainMenuTemplate.tmpl().appendTo(mainContent);
 
 
     }
-    
-    function showResultsView() {
-        me.mainContent.empty();
 
+    function showResultsView() {
+
+        $.ajax({
+            url: me.Host + "Quiz/Results",
+            type: "POST",
+            data: quizId,
+            dataType: "json",
+            success: function (result) {
+                me.mainContent.empty();
+                resultsTemplate.tmpl(result).appendTo(mainContent);
+
+            }
+        });
+       
+       
+
+    }
+    
+    function showNext() {
+
+        if (me.Completed)
+            showResultsView();
+        else
+            showQuestion(me.CurrentQuestion);
+        
     }
 
 
