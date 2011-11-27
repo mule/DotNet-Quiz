@@ -1,0 +1,1514 @@
+time;logger;level;message;exception
+2011-11-26 14:06:39.5050;Raven.Database.Indexing.WorkContext;Debug;Stopping background workers;
+2011-11-26 14:06:49.3825;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 14:06:49.3825;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 14:06:49.3825;Raven.Database.Util.PortUtil;Info;Default port 8080 was not available, so using available port 8081;
+2011-11-26 14:06:49.4145;Raven.Database.Impl.DocumentCacher;Info;"MemoryCache Settings:
+  PhysicalMemoryLimit = 99
+  CacheMemoryLimit    = 3192913920
+  PollingInterval     = 00:02:00";
+2011-11-26 14:06:49.4155;Raven.Storage.Esent.TransactionalStorage;Info;"Esent Settings:
+  MaxVerPages      = 32768
+  CacheSizeMax     = 262144
+  DatabasePageSize = 4096";
+2011-11-26 14:06:52.2037;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 14:07:08.7826;Raven.Database.Storage.IndexDefinitionStorage;Info;"New index Raven%2fDocumentsByEntityName:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+where  Tag != null 
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.ForEntityNames.Add(null);
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			where Tag != null
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+where  Tag != null 
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.ForEntityNames.Add(null);
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			where Tag != null
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+";
+2011-11-26 14:07:08.7826;Raven.Database.Indexing.IndexStorage;Debug;Loading saved index Raven/DocumentsByEntityName;
+2011-11-26 14:07:08.7826;Raven.Database.Indexing.Index.Indexing;Debug;Creating index for Raven/DocumentsByEntityName;
+2011-11-26 14:07:08.8536;Raven.Database.DocumentDatabase;Debug;Delete a document with key: Raven/Backup/Status and etag ;
+2011-11-26 14:07:09.0326;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Backup/Status' was not found, and considered deleted;
+2011-11-26 14:07:09.5457;Raven.Database.Server.HttpServer;Debug;Request # 400: GET     - 20 305 ms - DotNetQuizTest - 200 - /stats?noCache=1280450313;
+2011-11-26 14:07:09.5457;Raven.Database.Server.HttpServer;Debug;Request # 401: GET     - 20 305 ms - DotNetQuizTest - 200 - /stats?noCache=-1752688142;
+2011-11-26 14:07:09.5457;Raven.Database.Server.HttpServer;Debug;Request # 402: GET     - 17 341 ms - DotNetQuizTest - 200 - /stats?noCache=276153767;
+2011-11-26 14:25:04.2151;Raven.Database.Server.HttpServer;Debug;Request # 403: GET     -    65 ms - DotNetQuizTest - 200 - /stats?noCache=1645809845;
+2011-11-26 14:33:54.4735;Raven.Database.Server.HttpServer;Debug;Request # 404: GET     -    50 ms - DotNetQuizTest - 200 - /stats?noCache=-1127262025;
+2011-11-26 14:35:53.5633;Raven.Database.Indexing.WorkContext;Debug;Stopping background workers;
+2011-11-26 14:35:53.7823;Raven.Database.Indexing.WorkContext;Debug;Stopping background workers;
+time;logger;level;message;exception
+2011-11-26 16:02:15.5467;Raven.Database.Impl.DocumentCacher;Info;"MemoryCache Settings:
+  PhysicalMemoryLimit = 99
+  CacheMemoryLimit    = 3192913920
+  PollingInterval     = 00:02:00";
+2011-11-26 16:02:15.5827;Raven.Storage.Esent.TransactionalStorage;Info;"Esent Settings:
+  MaxVerPages      = 32768
+  CacheSizeMax     = 262144
+  DatabasePageSize = 4096";
+2011-11-26 16:02:17.1988;Raven.Database.Storage.IndexDefinitionStorage;Info;"New index Raven%2fDocumentsByEntityName:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+where  Tag != null 
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.ForEntityNames.Add(null);
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			where Tag != null
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+where  Tag != null 
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.ForEntityNames.Add(null);
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			where Tag != null
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+";
+2011-11-26 16:02:17.2108;Raven.Database.Indexing.IndexStorage;Debug;Loading saved index Raven/DocumentsByEntityName;
+2011-11-26 16:02:17.2558;Raven.Database.Indexing.Index.Indexing;Debug;Creating index for Raven/DocumentsByEntityName;
+2011-11-26 16:02:17.3168;Raven.Database.DocumentDatabase;Debug;Delete a document with key: Raven/Backup/Status and etag ;
+2011-11-26 16:02:17.3258;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Backup/Status' was not found, and considered deleted;
+2011-11-26 16:03:52.6782;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:03:52.7032;Raven.Database.Server.HttpServer;Debug;Request #   1: GET     -    64 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:03:52.7412;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:03:52.8132;Raven.Database.Server.HttpServer;Debug;Request #   2: GET     -    71 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:10:41.7306;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:10:41.7306;Raven.Database.Server.HttpServer;Debug;Request #   3: GET     -    11 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:10:41.7306;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:10:41.7306;Raven.Database.Server.HttpServer;Debug;Request #   4: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:10:42.0606;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:10:42.0606;Raven.Database.Server.HttpServer;Debug;Request #   5: GET     -     2 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:10:42.0606;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:10:42.0606;Raven.Database.Server.HttpServer;Debug;Request #   6: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:11:24.5431;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:11:24.5431;Raven.Database.Server.HttpServer;Debug;Request #   7: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:11:24.5431;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:11:24.5431;Raven.Database.Server.HttpServer;Debug;Request #   8: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:11:24.8041;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:11:24.8041;Raven.Database.Server.HttpServer;Debug;Request #   9: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:11:24.8041;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:11:24.8041;Raven.Database.Server.HttpServer;Debug;Request #  10: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:11:24.8921;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:11:25.0851;Raven.Database.Util.PortUtil;Info;Default port 8080 was not available, so using available port 8081;
+2011-11-26 16:11:25.1191;Raven.Database.Impl.DocumentCacher;Info;"MemoryCache Settings:
+  PhysicalMemoryLimit = 99
+  CacheMemoryLimit    = 3192913920
+  PollingInterval     = 00:02:00";
+2011-11-26 16:11:25.1191;Raven.Storage.Esent.TransactionalStorage;Info;"Esent Settings:
+  MaxVerPages      = 32768
+  CacheSizeMax     = 262144
+  DatabasePageSize = 4096";
+2011-11-26 16:11:28.1373;Raven.Database.Storage.IndexDefinitionStorage;Info;"New index Raven%2fDocumentsByEntityName:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+where  Tag != null 
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.ForEntityNames.Add(null);
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			where Tag != null
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+where  Tag != null 
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.ForEntityNames.Add(null);
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			where Tag != null
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+";
+2011-11-26 16:11:28.1373;Raven.Database.Indexing.IndexStorage;Debug;Loading saved index Raven/DocumentsByEntityName;
+2011-11-26 16:11:28.1373;Raven.Database.Indexing.Index.Indexing;Debug;Creating index for Raven/DocumentsByEntityName;
+2011-11-26 16:11:28.2133;Raven.Database.DocumentDatabase;Debug;Delete a document with key: Raven/Backup/Status and etag ;
+2011-11-26 16:11:28.2133;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Backup/Status' was not found, and considered deleted;
+2011-11-26 16:11:28.4413;Raven.Database.Storage.IndexDefinitionStorage;Info;"New index Temp%2fQuestions:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fQuestions : AbstractViewGenerator
+{
+	public Index_Temp_2fQuestions()
+	{
+		this.ViewText = @""from doc in docs.Questions
+select new {  }
+"";
+		this.ForEntityNames.Add(""Questions"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""Questions""
+			select new { __document_id = doc.__document_id });
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fQuestions : AbstractViewGenerator
+{
+	public Index_Temp_2fQuestions()
+	{
+		this.ViewText = @""from doc in docs.Questions
+select new {  }
+"";
+		this.ForEntityNames.Add(""Questions"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""Questions""
+			select new { __document_id = doc.__document_id });
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+";
+2011-11-26 16:11:28.4983;Raven.Database.Indexing.IndexStorage;Info;Creating index Temp/Questions with encoded name Temp/Questions;
+2011-11-26 16:11:28.6403;Raven.Database.Indexing.Index.Indexing;Debug;Creating index for Temp/Questions;
+2011-11-26 16:11:28.8843;Raven.Database.Indexing.Index.Querying;Debug;Issuing query on index Temp/Questions for all documents;
+2011-11-26 16:11:29.0273;Raven.Database.Indexing.Index.Querying;Debug;Issuing query on index Temp/Questions for all documents;
+2011-11-26 16:11:29.1193;Raven.Database.Indexing.AbstractIndexingExecuter;Debug;Indexing 47 documents for index: Temp/Questions;
+2011-11-26 16:11:29.1193;Raven.Database.Indexing.Index.Querying;Debug;Issuing query on index Temp/Questions for all documents;
+2011-11-26 16:11:29.2273;Raven.Database.Indexing.Index.Querying;Debug;Issuing query on index Temp/Questions for all documents;
+2011-11-26 16:11:29.3273;Raven.Database.Indexing.Index.Querying;Debug;Issuing query on index Temp/Questions for all documents;
+2011-11-26 16:11:29.4273;Raven.Database.Indexing.Index.Querying;Debug;Issuing query on index Temp/Questions for all documents;
+2011-11-26 16:11:29.4494;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Questions' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:questions-6145>>;
+2011-11-26 16:11:29.5274;Raven.Database.Indexing.Index.Querying;Debug;Issuing query on index Temp/Questions for all documents;
+2011-11-26 16:11:29.5734;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Questions' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:questions-7169>>;
+2011-11-26 16:11:29.5864;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Questions' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:questions-9217>>;
+2011-11-26 16:11:29.5864;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Questions' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:questions-10241>>;
+2011-11-26 16:11:29.5864;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Questions' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:questions-11265>>;
+2011-11-26 16:11:29.5864;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Questions' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:questions-12289>>;
+2011-11-26 16:11:29.5864;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Questions' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:questions-13313>>;
+2011-11-26 16:11:29.5864;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Questions' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:questions-14337>>;
+2011-11-26 16:11:29.5864;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Questions' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:questions-15361>>;
+2011-11-26 16:11:29.6274;Raven.Database.Indexing.Index.Querying;Debug;Issuing query on index Temp/Questions for all documents;
+2011-11-26 16:11:29.7274;Raven.Database.Indexing.Index.Querying;Debug;Issuing query on index Temp/Questions for all documents;
+2011-11-26 16:11:29.7574;Raven.Database.Indexing.Index.Indexing;Debug;Indexed 9 documents for Temp/Questions;
+2011-11-26 16:11:29.8904;Raven.Database.Indexing.Index.Querying;Debug;Issuing query on index Temp/Questions for all documents;
+2011-11-26 16:11:29.9414;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'questions-6145' was found;
+2011-11-26 16:11:29.9414;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'questions-7169' was found;
+2011-11-26 16:11:29.9414;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'questions-9217' was found;
+2011-11-26 16:11:29.9414;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'questions-10241' was found;
+2011-11-26 16:11:29.9414;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'questions-11265' was found;
+2011-11-26 16:11:29.9414;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'questions-12289' was found;
+2011-11-26 16:11:29.9414;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'questions-13313' was found;
+2011-11-26 16:11:29.9444;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'questions-14337' was found;
+2011-11-26 16:11:29.9444;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'questions-15361' was found;
+2011-11-26 16:11:30.0524;Raven.Database.Server.HttpServer;Debug;Request #  11: GET     - 5 162 ms - DotNetQuizTest - 200 - /indexes/dynamic/Questions?query=&start=0&pageSize=128&aggregation=None;
+2011-11-26 16:11:30.1464;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Hilo/quizzes' was found;
+2011-11-26 16:11:30.1474;Raven.Database.Server.HttpServer;Debug;Request #  12: GET     -     4 ms - DotNetQuizTest - 200 - /docs/Raven/Hilo/quizzes;
+2011-11-26 16:11:30.1834;Raven.Database.DocumentDatabase;Debug;Putting a document with key: Raven/Hilo/quizzes and etag 00000000-0000-1c00-0000-000000000015;
+2011-11-26 16:11:30.2144;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Inserted a new document with key 'Raven/Hilo/quizzes', update: True, ;
+2011-11-26 16:11:30.2284;Raven.Database.Indexing.AbstractIndexingExecuter;Debug;Indexing 1 documents for index: Raven/DocumentsByEntityName;
+2011-11-26 16:11:30.2284;Raven.Database.Indexing.AbstractIndexingExecuter;Debug;Indexing 1 documents for index: Temp/Questions;
+2011-11-26 16:11:30.2284;Raven.Database.Indexing.Index.Indexing;Debug;Indexed 0 documents for Temp/Questions;
+2011-11-26 16:11:30.2284;Raven.Database.Server.HttpServer;Debug;Request #  13: PUT     -    69 ms - DotNetQuizTest - 201 - /docs/Raven/Hilo/quizzes;
+2011-11-26 16:11:30.2284;Raven.Database.Indexing.Index.Indexing;Debug;Indexed 0 documents for Raven/DocumentsByEntityName;
+2011-11-26 16:11:30.2754;Raven.Database.DocumentDatabase;Debug;Executing batched commands in a single transaction;
+2011-11-26 16:11:30.2894;Raven.Database.DocumentDatabase;Debug;Putting a document with key: quizzes-36865 and etag ;
+2011-11-26 16:11:30.4514;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Inserted a new document with key 'quizzes-36865', update: False, ;
+2011-11-26 16:11:30.4754;Raven.Database.DocumentDatabase;Debug;Successfully executed 1 commands;
+2011-11-26 16:11:30.4754;Raven.Database.Indexing.AbstractIndexingExecuter;Debug;Indexing 1 documents for index: Raven/DocumentsByEntityName;
+2011-11-26 16:11:30.4754;Raven.Database.Indexing.AbstractIndexingExecuter;Debug;Indexing 1 documents for index: Temp/Questions;
+2011-11-26 16:11:30.4754;Raven.Database.Server.HttpServer;Debug;Request #  14: POST    -   204 ms - DotNetQuizTest - 200 - /bulk_docs;
+2011-11-26 16:11:30.4754;Raven.Database.Indexing.Index.Indexing;Debug;Indexed 0 documents for Temp/Questions;
+2011-11-26 16:11:30.4754;Raven.Database.Server.HttpServer;Debug;"	PUT quizzes-36865
+";
+2011-11-26 16:11:30.5424;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Raven/DocumentsByEntityName' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-36865> indexed,omitNorms<Tag:Quizzes> indexed,omitNorms<LastModified:20111126141130450>>;
+2011-11-26 16:11:30.5784;Raven.Database.Indexing.Index.Indexing;Debug;Indexed 1 documents for Raven/DocumentsByEntityName;
+2011-11-26 16:11:55.8679;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:11:55.8679;Raven.Database.Server.HttpServer;Debug;Request #  15: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:11:55.8679;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:11:55.8679;Raven.Database.Server.HttpServer;Debug;Request #  16: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:15:26.7789;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:15:26.7789;Raven.Database.Server.HttpServer;Debug;Request #  17: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:15:26.7789;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:15:26.7789;Raven.Database.Server.HttpServer;Debug;Request #  18: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:15:31.5222;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:15:31.5222;Raven.Database.Server.HttpServer;Debug;Request #  19: GET     -     8 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:15:31.5222;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:15:31.5222;Raven.Database.Server.HttpServer;Debug;Request #  20: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:21:02.0121;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:21:02.0121;Raven.Database.Server.HttpServer;Debug;Request #  21: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:21:02.0961;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:21:02.0961;Raven.Database.Server.HttpServer;Debug;Request #  22: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:21:02.2111;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:21:02.2111;Raven.Database.Server.HttpServer;Debug;Request #  23: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:21:02.2111;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:21:02.2111;Raven.Database.Server.HttpServer;Debug;Request #  24: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:21:15.2349;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:21:15.2349;Raven.Database.Server.HttpServer;Debug;Request #  25: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:21:15.2349;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:21:15.2349;Raven.Database.Server.HttpServer;Debug;Request #  26: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:21:15.2739;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:21:15.2739;Raven.Database.Server.HttpServer;Debug;Request #  27: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:21:15.2739;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:21:15.2739;Raven.Database.Server.HttpServer;Debug;Request #  28: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:21:15.3299;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:21:15.3299;Raven.Database.Server.HttpServer;Debug;Request #  29: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:21:15.3299;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:21:15.3299;Raven.Database.Server.HttpServer;Debug;Request #  30: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:22:15.3373;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:22:15.3373;Raven.Database.Server.HttpServer;Debug;Request #  31: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:22:15.3373;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:22:15.3373;Raven.Database.Server.HttpServer;Debug;Request #  32: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:22:15.4053;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:22:15.4053;Raven.Database.Server.HttpServer;Debug;Request #  33: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:22:15.4053;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:22:15.4053;Raven.Database.Server.HttpServer;Debug;Request #  34: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:22:17.7634;Raven.Database.Indexing.WorkContext;Debug;Stopping background workers;
+2011-11-26 16:23:15.4567;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:23:15.4567;Raven.Database.Server.HttpServer;Debug;Request #  35: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:23:15.4587;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:23:15.4587;Raven.Database.Server.HttpServer;Debug;Request #  36: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:23:15.5067;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:23:15.5067;Raven.Database.Server.HttpServer;Debug;Request #  37: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:23:15.5067;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:23:15.5067;Raven.Database.Server.HttpServer;Debug;Request #  38: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:23:21.2411;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:23:21.2411;Raven.Database.Server.HttpServer;Debug;Request #  39: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:23:21.2411;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:23:21.2411;Raven.Database.Server.HttpServer;Debug;Request #  40: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:23:23.9572;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:23:23.9572;Raven.Database.Server.HttpServer;Debug;Request #  41: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:23:23.9572;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:23:23.9572;Raven.Database.Server.HttpServer;Debug;Request #  42: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:23:24.2182;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:23:24.2182;Raven.Database.Server.HttpServer;Debug;Request #  43: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:23:24.2182;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:23:24.2182;Raven.Database.Server.HttpServer;Debug;Request #  44: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:23:24.2762;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:23:24.2762;Raven.Database.Util.PortUtil;Info;Default port 8080 was not available, so using available port 8081;
+2011-11-26 16:23:24.3052;Raven.Database.Impl.DocumentCacher;Info;"MemoryCache Settings:
+  PhysicalMemoryLimit = 99
+  CacheMemoryLimit    = 3192913920
+  PollingInterval     = 00:02:00";
+2011-11-26 16:23:24.3052;Raven.Storage.Esent.TransactionalStorage;Info;"Esent Settings:
+  MaxVerPages      = 32768
+  CacheSizeMax     = 262144
+  DatabasePageSize = 4096";
+2011-11-26 16:23:24.9513;Raven.Database.Storage.IndexDefinitionStorage;Info;"New index Raven%2fDocumentsByEntityName:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+where  Tag != null 
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.ForEntityNames.Add(null);
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			where Tag != null
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+where  Tag != null 
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.ForEntityNames.Add(null);
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			where Tag != null
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+";
+2011-11-26 16:23:25.0373;Raven.Database.Storage.IndexDefinitionStorage;Info;"New index Temp%2fQuestions:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fQuestions : AbstractViewGenerator
+{
+	public Index_Temp_2fQuestions()
+	{
+		this.ViewText = @""from doc in docs.Questions
+select new {  }
+"";
+		this.ForEntityNames.Add(""Questions"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""Questions""
+			select new { __document_id = doc.__document_id });
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fQuestions : AbstractViewGenerator
+{
+	public Index_Temp_2fQuestions()
+	{
+		this.ViewText = @""from doc in docs.Questions
+select new {  }
+"";
+		this.ForEntityNames.Add(""Questions"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""Questions""
+			select new { __document_id = doc.__document_id });
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+";
+2011-11-26 16:23:25.0373;Raven.Database.Indexing.IndexStorage;Debug;Loading saved index Raven/DocumentsByEntityName;
+2011-11-26 16:23:25.0373;Raven.Database.Indexing.Index.Indexing;Debug;Creating index for Raven/DocumentsByEntityName;
+2011-11-26 16:23:25.0373;Raven.Database.Indexing.IndexStorage;Debug;Loading saved index Temp/Questions;
+2011-11-26 16:23:25.0373;Raven.Database.Indexing.Index.Indexing;Debug;Creating index for Temp/Questions;
+2011-11-26 16:23:25.0373;Raven.Database.DocumentDatabase;Debug;Delete a document with key: Raven/Backup/Status and etag ;
+2011-11-26 16:23:25.0373;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Backup/Status' was not found, and considered deleted;
+2011-11-26 16:23:25.0373;Raven.Database.Indexing.IndexStorage;Info;Deleting index Temp/Questions;
+2011-11-26 16:23:25.1453;Raven.Database.Storage.IndexDefinitionStorage;Info;"New index Temp%2fQuizzes:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fQuizzes : AbstractViewGenerator
+{
+	public Index_Temp_2fQuizzes()
+	{
+		this.ViewText = @""from doc in docs.Quizzes
+select new {  }
+"";
+		this.ForEntityNames.Add(""Quizzes"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""Quizzes""
+			select new { __document_id = doc.__document_id });
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fQuizzes : AbstractViewGenerator
+{
+	public Index_Temp_2fQuizzes()
+	{
+		this.ViewText = @""from doc in docs.Quizzes
+select new {  }
+"";
+		this.ForEntityNames.Add(""Quizzes"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""Quizzes""
+			select new { __document_id = doc.__document_id });
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+";
+2011-11-26 16:23:25.1463;Raven.Database.Indexing.IndexStorage;Info;Creating index Temp/Quizzes with encoded name Temp/Quizzes;
+2011-11-26 16:23:25.1463;Raven.Database.Indexing.Index.Indexing;Debug;Creating index for Temp/Quizzes;
+2011-11-26 16:23:25.1713;Raven.Database.Indexing.Index.Querying;Debug;Issuing query on index Temp/Quizzes for all documents;
+2011-11-26 16:23:25.2533;Raven.Database.Indexing.AbstractIndexingExecuter;Debug;Indexing 48 documents for index: Temp/Quizzes;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Querying;Debug;Issuing query on index Temp/Quizzes for all documents;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-1>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-1025>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-2049>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-3073>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-4097>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-5121>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-6145>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-7169>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-8193>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-9217>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-10241>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-11265>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-12289>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-13313>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-14337>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-15361>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-16385>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-17409>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-18433>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-19457>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-20481>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-21505>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-22529>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-23553>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-24577>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-25601>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-26625>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-27649>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-28673>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-29697>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-30721>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-31745>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-32769>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-33793>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-34817>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-35841>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-36865>>;
+2011-11-26 16:23:25.2713;Raven.Database.Indexing.Index.Indexing;Debug;Indexed 37 documents for Temp/Quizzes;
+2011-11-26 16:23:25.3923;Raven.Database.Indexing.Index.Querying;Debug;Issuing query on index Temp/Quizzes for all documents;
+2011-11-26 16:23:25.3923;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-1' was found;
+2011-11-26 16:23:25.3923;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-1025' was found;
+2011-11-26 16:23:25.3923;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-2049' was found;
+2011-11-26 16:23:25.3923;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-3073' was found;
+2011-11-26 16:23:25.3923;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-4097' was found;
+2011-11-26 16:23:25.3963;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-5121' was found;
+2011-11-26 16:23:25.3963;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-6145' was found;
+2011-11-26 16:23:25.3963;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-7169' was found;
+2011-11-26 16:23:25.3963;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-8193' was found;
+2011-11-26 16:23:25.3963;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-9217' was found;
+2011-11-26 16:23:25.3963;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-10241' was found;
+2011-11-26 16:23:25.3963;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-11265' was found;
+2011-11-26 16:23:25.3963;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-12289' was found;
+2011-11-26 16:23:25.3963;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-13313' was found;
+2011-11-26 16:23:25.3963;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-14337' was found;
+2011-11-26 16:23:25.4113;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-15361' was found;
+2011-11-26 16:23:25.4113;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-16385' was found;
+2011-11-26 16:23:25.4113;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-17409' was found;
+2011-11-26 16:23:25.4113;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-18433' was found;
+2011-11-26 16:23:25.4113;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-19457' was found;
+2011-11-26 16:23:25.4113;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-20481' was found;
+2011-11-26 16:23:25.4113;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-21505' was found;
+2011-11-26 16:23:25.4113;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-22529' was found;
+2011-11-26 16:23:25.4113;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-23553' was found;
+2011-11-26 16:23:25.4113;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-24577' was found;
+2011-11-26 16:23:25.4113;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-25601' was found;
+2011-11-26 16:23:25.4113;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-26625' was found;
+2011-11-26 16:23:25.4113;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-27649' was found;
+2011-11-26 16:23:25.4113;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-28673' was found;
+2011-11-26 16:23:25.4273;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-29697' was found;
+2011-11-26 16:23:25.4273;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-30721' was found;
+2011-11-26 16:23:25.4273;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-31745' was found;
+2011-11-26 16:23:25.4273;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-32769' was found;
+2011-11-26 16:23:25.4273;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-33793' was found;
+2011-11-26 16:23:25.4273;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-34817' was found;
+2011-11-26 16:23:25.4273;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-35841' was found;
+2011-11-26 16:23:25.4273;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'quizzes-36865' was found;
+2011-11-26 16:23:25.4823;Raven.Database.Server.HttpServer;Debug;Request #  45: GET     - 1 198 ms - DotNetQuizTest - 200 - /indexes/dynamic/Quizzes?query=&start=0&pageSize=128&aggregation=None;
+2011-11-26 16:23:32.3427;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:23:32.3427;Raven.Database.Server.HttpServer;Debug;Request #  46: GET     -    53 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:23:32.3427;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:23:32.3427;Raven.Database.Server.HttpServer;Debug;Request #  47: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:23:32.4397;Raven.Database.Storage.IndexDefinitionStorage;Info;"New index Temp%2fQuestions:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fQuestions : AbstractViewGenerator
+{
+	public Index_Temp_2fQuestions()
+	{
+		this.ViewText = @""from doc in docs.Questions
+select new {  }
+"";
+		this.ForEntityNames.Add(""Questions"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""Questions""
+			select new { __document_id = doc.__document_id });
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Temp_2fQuestions : AbstractViewGenerator
+{
+	public Index_Temp_2fQuestions()
+	{
+		this.ViewText = @""from doc in docs.Questions
+select new {  }
+"";
+		this.ForEntityNames.Add(""Questions"");
+		this.AddMapDefinition(docs => from doc in docs
+			where doc[""@metadata""][""Raven-Entity-Name""] == ""Questions""
+			select new { __document_id = doc.__document_id });
+		this.AddField(""__document_id"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+";
+2011-11-26 16:23:32.4397;Raven.Database.Indexing.IndexStorage;Info;Creating index Temp/Questions with encoded name Temp/Questions;
+2011-11-26 16:23:32.4397;Raven.Database.Indexing.Index.Indexing;Debug;Creating index for Temp/Questions;
+2011-11-26 16:23:32.4397;Raven.Database.Indexing.Index.Querying;Debug;Issuing query on index Temp/Questions for all documents;
+2011-11-26 16:23:32.4507;Raven.Database.Indexing.AbstractIndexingExecuter;Debug;Indexing 48 documents for index: Temp/Questions;
+2011-11-26 16:23:32.4917;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Questions' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:questions-6145>>;
+2011-11-26 16:23:32.4917;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Questions' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:questions-7169>>;
+2011-11-26 16:23:32.4917;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Questions' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:questions-9217>>;
+2011-11-26 16:23:32.4917;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Questions' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:questions-10241>>;
+2011-11-26 16:23:32.4917;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Questions' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:questions-11265>>;
+2011-11-26 16:23:32.4917;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Questions' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:questions-12289>>;
+2011-11-26 16:23:32.4917;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Questions' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:questions-13313>>;
+2011-11-26 16:23:32.4917;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Questions' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:questions-14337>>;
+2011-11-26 16:23:32.4917;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Questions' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:questions-15361>>;
+2011-11-26 16:23:32.4917;Raven.Database.Indexing.Index.Indexing;Debug;Indexed 9 documents for Temp/Questions;
+2011-11-26 16:23:32.5427;Raven.Database.Indexing.Index.Querying;Debug;Issuing query on index Temp/Questions for all documents;
+2011-11-26 16:23:32.5427;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'questions-6145' was found;
+2011-11-26 16:23:32.5427;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'questions-7169' was found;
+2011-11-26 16:23:32.5427;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'questions-9217' was found;
+2011-11-26 16:23:32.5427;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'questions-10241' was found;
+2011-11-26 16:23:32.5427;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'questions-11265' was found;
+2011-11-26 16:23:32.5427;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'questions-12289' was found;
+2011-11-26 16:23:32.5427;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'questions-13313' was found;
+2011-11-26 16:23:32.5427;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'questions-14337' was found;
+2011-11-26 16:23:32.5427;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'questions-15361' was found;
+2011-11-26 16:23:32.5427;Raven.Database.Server.HttpServer;Debug;Request #  48: GET     -   201 ms - DotNetQuizTest - 200 - /indexes/dynamic/Questions?query=&start=0&pageSize=128&aggregation=None;
+2011-11-26 16:23:32.5427;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Hilo/quizzes' was found;
+2011-11-26 16:23:32.5427;Raven.Database.Server.HttpServer;Debug;Request #  49: GET     -     0 ms - DotNetQuizTest - 200 - /docs/Raven/Hilo/quizzes;
+2011-11-26 16:23:32.5687;Raven.Database.DocumentDatabase;Debug;Putting a document with key: Raven/Hilo/quizzes and etag 00000000-0000-1f00-0000-000000000001;
+2011-11-26 16:23:32.5687;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Inserted a new document with key 'Raven/Hilo/quizzes', update: True, ;
+2011-11-26 16:23:32.5687;Raven.Database.Indexing.AbstractIndexingExecuter;Debug;Indexing 1 documents for index: Raven/DocumentsByEntityName;
+2011-11-26 16:23:32.5687;Raven.Database.Indexing.AbstractIndexingExecuter;Debug;Indexing 1 documents for index: Temp/Questions;
+2011-11-26 16:23:32.5687;Raven.Database.Indexing.AbstractIndexingExecuter;Debug;Indexing 1 documents for index: Temp/Quizzes;
+2011-11-26 16:23:32.5687;Raven.Database.Indexing.Index.Indexing;Debug;Indexed 0 documents for Temp/Questions;
+2011-11-26 16:23:32.5687;Raven.Database.Indexing.Index.Indexing;Debug;Indexed 0 documents for Temp/Quizzes;
+2011-11-26 16:23:32.5687;Raven.Database.Server.HttpServer;Debug;Request #  50: PUT     -     1 ms - DotNetQuizTest - 201 - /docs/Raven/Hilo/quizzes;
+2011-11-26 16:23:32.5737;Raven.Database.Indexing.Index.Indexing;Debug;Indexed 0 documents for Raven/DocumentsByEntityName;
+2011-11-26 16:23:32.6117;Raven.Database.DocumentDatabase;Debug;Executing batched commands in a single transaction;
+2011-11-26 16:23:32.6117;Raven.Database.DocumentDatabase;Debug;Putting a document with key: quizzes-37889 and etag ;
+2011-11-26 16:23:32.6117;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Inserted a new document with key 'quizzes-37889', update: False, ;
+2011-11-26 16:23:32.6307;Raven.Database.DocumentDatabase;Debug;Successfully executed 1 commands;
+2011-11-26 16:23:32.6307;Raven.Database.Indexing.AbstractIndexingExecuter;Debug;Indexing 1 documents for index: Raven/DocumentsByEntityName;
+2011-11-26 16:23:32.6307;Raven.Database.Indexing.AbstractIndexingExecuter;Debug;Indexing 1 documents for index: Temp/Questions;
+2011-11-26 16:23:32.6307;Raven.Database.Indexing.AbstractIndexingExecuter;Debug;Indexing 1 documents for index: Temp/Quizzes;
+2011-11-26 16:23:32.6307;Raven.Database.Server.HttpServer;Debug;Request #  51: POST    -    19 ms - DotNetQuizTest - 200 - /bulk_docs;
+2011-11-26 16:23:32.6307;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Temp/Quizzes' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-37889>>;
+2011-11-26 16:23:32.6307;Raven.Database.Indexing.Index.Indexing;Debug;Indexed 0 documents for Temp/Questions;
+2011-11-26 16:23:32.6307;Raven.Database.Indexing.Index.Indexing;Debug;Indexed 1 documents for Temp/Quizzes;
+2011-11-26 16:23:32.6307;Raven.Database.Server.HttpServer;Debug;"	PUT quizzes-37889
+";
+2011-11-26 16:23:32.6857;Raven.Database.Indexing.Index.Indexing;Debug;Index 'Raven/DocumentsByEntityName' resulted in: Document<stored/uncompressed,indexed,tokenized,omitNorms<__document_id:quizzes-37889> indexed,omitNorms<Tag:Quizzes> indexed,omitNorms<LastModified:20111126142332613>>;
+2011-11-26 16:23:32.7027;Raven.Database.Indexing.Index.Indexing;Debug;Indexed 1 documents for Raven/DocumentsByEntityName;
+2011-11-26 16:24:15.6302;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:24:15.6302;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:24:15.6302;Raven.Database.Server.HttpServer;Debug;Request #  52: GET     -    64 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:24:15.6302;Raven.Database.Server.HttpServer;Debug;Request #  53: GET     -    74 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:24:15.7392;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:24:15.7392;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:24:15.7392;Raven.Database.Server.HttpServer;Debug;Request #  54: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:24:15.7392;Raven.Database.Server.HttpServer;Debug;Request #  55: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:24:41.7227;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:24:41.7227;Raven.Database.Server.HttpServer;Debug;Request #  56: GET     -    64 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:24:41.7287;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:24:41.7287;Raven.Database.Server.HttpServer;Debug;Request #  57: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:24:49.4611;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:24:49.4691;Raven.Database.Server.HttpServer;Debug;Request #  58: GET     -     8 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:24:49.4691;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:24:49.4691;Raven.Database.Server.HttpServer;Debug;Request #  59: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:24:49.5221;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:24:49.5221;Raven.Database.Server.HttpServer;Debug;Request #  60: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:24:49.5221;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:24:49.5221;Raven.Database.Server.HttpServer;Debug;Request #  61: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:25:49.5845;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:25:49.5845;Raven.Database.Server.HttpServer;Debug;Request #  62: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:25:49.5895;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:25:49.5895;Raven.Database.Server.HttpServer;Debug;Request #  63: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:25:49.6596;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:25:49.6596;Raven.Database.Server.HttpServer;Debug;Request #  64: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:25:49.6596;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:25:49.6596;Raven.Database.Server.HttpServer;Debug;Request #  65: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:26:49.7230;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:26:49.7230;Raven.Database.Server.HttpServer;Debug;Request #  66: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:26:49.7270;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:26:49.7270;Raven.Database.Server.HttpServer;Debug;Request #  67: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:26:49.7910;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:26:49.7910;Raven.Database.Server.HttpServer;Debug;Request #  68: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:26:49.7910;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:26:49.7910;Raven.Database.Server.HttpServer;Debug;Request #  69: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:27:49.8434;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:27:49.8434;Raven.Database.Server.HttpServer;Debug;Request #  70: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:27:49.8434;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:27:49.8484;Raven.Database.Server.HttpServer;Debug;Request #  71: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:27:49.9394;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:27:49.9394;Raven.Database.Server.HttpServer;Debug;Request #  72: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:27:49.9394;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:27:49.9394;Raven.Database.Server.HttpServer;Debug;Request #  73: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:28:49.9889;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:28:49.9889;Raven.Database.Server.HttpServer;Debug;Request #  74: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:28:49.9889;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:28:49.9889;Raven.Database.Server.HttpServer;Debug;Request #  75: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:28:50.0389;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:28:50.0389;Raven.Database.Server.HttpServer;Debug;Request #  76: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:28:50.0389;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:28:50.0389;Raven.Database.Server.HttpServer;Debug;Request #  77: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:29:50.0743;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:29:50.0743;Raven.Database.Server.HttpServer;Debug;Request #  78: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:29:50.0743;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:29:50.0743;Raven.Database.Server.HttpServer;Debug;Request #  79: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:29:50.1133;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:29:50.1133;Raven.Database.Server.HttpServer;Debug;Request #  80: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:29:50.1133;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:29:50.1133;Raven.Database.Server.HttpServer;Debug;Request #  81: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:30:50.1757;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:30:50.1757;Raven.Database.Server.HttpServer;Debug;Request #  82: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:30:50.1757;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:30:50.1757;Raven.Database.Server.HttpServer;Debug;Request #  83: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:30:50.2517;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:30:50.2517;Raven.Database.Server.HttpServer;Debug;Request #  84: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:30:50.2517;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:30:50.2517;Raven.Database.Server.HttpServer;Debug;Request #  85: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:31:50.3062;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:31:50.3062;Raven.Database.Server.HttpServer;Debug;Request #  86: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:31:50.3102;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:31:50.3102;Raven.Database.Server.HttpServer;Debug;Request #  87: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:31:50.3582;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:31:50.3582;Raven.Database.Server.HttpServer;Debug;Request #  88: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:31:50.3582;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:31:50.3582;Raven.Database.Server.HttpServer;Debug;Request #  89: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:32:50.3946;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:32:50.3946;Raven.Database.Server.HttpServer;Debug;Request #  90: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:32:50.3946;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:32:50.3946;Raven.Database.Server.HttpServer;Debug;Request #  91: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:32:50.4336;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:32:50.4336;Raven.Database.Server.HttpServer;Debug;Request #  92: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:32:50.4336;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:32:50.4336;Raven.Database.Server.HttpServer;Debug;Request #  93: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:33:50.5181;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:33:50.5181;Raven.Database.Server.HttpServer;Debug;Request #  94: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:33:50.5181;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:33:50.5181;Raven.Database.Server.HttpServer;Debug;Request #  95: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:33:50.5921;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:33:50.5921;Raven.Database.Server.HttpServer;Debug;Request #  96: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:33:50.5921;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:33:50.5921;Raven.Database.Server.HttpServer;Debug;Request #  97: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:34:17.9166;Raven.Database.Indexing.WorkContext;Debug;Stopping background workers;
+2011-11-26 16:34:50.6225;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:34:50.6225;Raven.Database.Server.HttpServer;Debug;Request #  98: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:34:50.6225;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:34:50.6225;Raven.Database.Server.HttpServer;Debug;Request #  99: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:34:50.6635;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:34:50.6635;Raven.Database.Server.HttpServer;Debug;Request # 100: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:34:50.6635;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:34:50.6635;Raven.Database.Server.HttpServer;Debug;Request # 101: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:35:50.7169;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:35:50.7169;Raven.Database.Server.HttpServer;Debug;Request # 102: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:35:50.7169;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:35:50.7169;Raven.Database.Server.HttpServer;Debug;Request # 103: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:35:50.7689;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:35:50.7689;Raven.Database.Server.HttpServer;Debug;Request # 104: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:35:50.7689;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:35:50.7689;Raven.Database.Server.HttpServer;Debug;Request # 105: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:36:50.8094;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:36:50.8094;Raven.Database.Server.HttpServer;Debug;Request # 106: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:36:50.8094;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:36:50.8094;Raven.Database.Server.HttpServer;Debug;Request # 107: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:36:50.8544;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:36:50.8544;Raven.Database.Server.HttpServer;Debug;Request # 108: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:36:50.8544;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:36:50.8544;Raven.Database.Server.HttpServer;Debug;Request # 109: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:37:50.8998;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:37:50.8998;Raven.Database.Server.HttpServer;Debug;Request # 110: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:37:50.8998;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:37:50.8998;Raven.Database.Server.HttpServer;Debug;Request # 111: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:37:50.9528;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:37:50.9528;Raven.Database.Server.HttpServer;Debug;Request # 112: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:37:50.9528;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:37:50.9528;Raven.Database.Server.HttpServer;Debug;Request # 113: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:38:51.0062;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:38:51.0062;Raven.Database.Server.HttpServer;Debug;Request # 114: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:38:51.0062;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:38:51.0062;Raven.Database.Server.HttpServer;Debug;Request # 115: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:38:51.0612;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:38:51.0612;Raven.Database.Server.HttpServer;Debug;Request # 116: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:38:51.0612;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:38:51.0612;Raven.Database.Server.HttpServer;Debug;Request # 117: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:39:51.1167;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:39:51.1167;Raven.Database.Server.HttpServer;Debug;Request # 118: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:39:51.1207;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:39:51.1207;Raven.Database.Server.HttpServer;Debug;Request # 119: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:39:51.1967;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:39:51.1967;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:39:51.1967;Raven.Database.Server.HttpServer;Debug;Request # 120: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:39:51.1967;Raven.Database.Server.HttpServer;Debug;Request # 121: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:40:51.3191;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:40:51.3201;Raven.Database.Server.HttpServer;Debug;Request # 122: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:40:51.3201;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:40:51.3201;Raven.Database.Server.HttpServer;Debug;Request # 123: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:40:51.3821;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:40:51.3821;Raven.Database.Server.HttpServer;Debug;Request # 124: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:40:51.3821;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:40:51.3821;Raven.Database.Server.HttpServer;Debug;Request # 125: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:41:51.4146;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:41:51.4146;Raven.Database.Server.HttpServer;Debug;Request # 126: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:41:51.4146;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:41:51.4146;Raven.Database.Server.HttpServer;Debug;Request # 127: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:41:51.4726;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:41:51.4726;Raven.Database.Server.HttpServer;Debug;Request # 128: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:41:51.4726;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:41:51.4746;Raven.Database.Server.HttpServer;Debug;Request # 129: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:42:51.5260;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:42:51.5260;Raven.Database.Server.HttpServer;Debug;Request # 130: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:42:51.5260;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:42:51.5260;Raven.Database.Server.HttpServer;Debug;Request # 131: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:42:51.6340;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:42:51.6340;Raven.Database.Server.HttpServer;Debug;Request # 132: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:42:51.6340;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:42:51.6340;Raven.Database.Server.HttpServer;Debug;Request # 133: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:43:51.6924;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:43:51.6924;Raven.Database.Server.HttpServer;Debug;Request # 134: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:43:51.6924;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:43:51.6924;Raven.Database.Server.HttpServer;Debug;Request # 135: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:43:51.7904;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:43:51.7904;Raven.Database.Server.HttpServer;Debug;Request # 136: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:43:51.7904;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:43:51.7904;Raven.Database.Server.HttpServer;Debug;Request # 137: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:44:51.8309;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:44:51.8309;Raven.Database.Server.HttpServer;Debug;Request # 138: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:44:51.8309;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:44:51.8309;Raven.Database.Server.HttpServer;Debug;Request # 139: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:44:51.8719;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:44:51.8719;Raven.Database.Server.HttpServer;Debug;Request # 140: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:44:51.8719;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:44:51.8719;Raven.Database.Server.HttpServer;Debug;Request # 141: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:45:51.9583;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:45:51.9583;Raven.Database.Server.HttpServer;Debug;Request # 142: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:45:51.9583;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:45:51.9583;Raven.Database.Server.HttpServer;Debug;Request # 143: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:45:52.0113;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:45:52.0113;Raven.Database.Server.HttpServer;Debug;Request # 144: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:45:52.0123;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:45:52.0123;Raven.Database.Server.HttpServer;Debug;Request # 145: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:46:52.0968;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:46:52.0968;Raven.Database.Server.HttpServer;Debug;Request # 146: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:46:52.0968;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:46:52.0968;Raven.Database.Server.HttpServer;Debug;Request # 147: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:46:52.1568;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:46:52.1568;Raven.Database.Server.HttpServer;Debug;Request # 148: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:46:52.1568;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:46:52.1568;Raven.Database.Server.HttpServer;Debug;Request # 149: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:47:52.2072;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:47:52.2072;Raven.Database.Server.HttpServer;Debug;Request # 150: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:47:52.2072;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:47:52.2072;Raven.Database.Server.HttpServer;Debug;Request # 151: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:47:52.2592;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:47:52.2592;Raven.Database.Server.HttpServer;Debug;Request # 152: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:47:52.2592;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:47:52.2592;Raven.Database.Server.HttpServer;Debug;Request # 153: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:48:52.3096;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:48:52.3096;Raven.Database.Server.HttpServer;Debug;Request # 154: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:48:52.3096;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:48:52.3096;Raven.Database.Server.HttpServer;Debug;Request # 155: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:48:52.3976;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:48:52.3976;Raven.Database.Server.HttpServer;Debug;Request # 156: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:48:52.3976;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:48:52.3976;Raven.Database.Server.HttpServer;Debug;Request # 157: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:49:52.4551;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:49:52.4551;Raven.Database.Server.HttpServer;Debug;Request # 158: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:49:52.4581;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:49:52.4581;Raven.Database.Server.HttpServer;Debug;Request # 159: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:49:52.5621;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:49:52.5621;Raven.Database.Server.HttpServer;Debug;Request # 160: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:49:52.5621;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:49:52.5621;Raven.Database.Server.HttpServer;Debug;Request # 161: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:50:52.6165;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:50:52.6165;Raven.Database.Server.HttpServer;Debug;Request # 162: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:50:52.6165;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:50:52.6165;Raven.Database.Server.HttpServer;Debug;Request # 163: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:50:52.6895;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:50:52.6895;Raven.Database.Server.HttpServer;Debug;Request # 164: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:50:52.6895;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:50:52.6895;Raven.Database.Server.HttpServer;Debug;Request # 165: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:51:52.7340;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:51:52.7340;Raven.Database.Server.HttpServer;Debug;Request # 166: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:51:52.7340;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:51:52.7340;Raven.Database.Server.HttpServer;Debug;Request # 167: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:51:52.8100;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:51:52.8100;Raven.Database.Server.HttpServer;Debug;Request # 168: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:51:52.8110;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:51:52.8110;Raven.Database.Server.HttpServer;Debug;Request # 169: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:52:52.8644;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:52:52.8644;Raven.Database.Server.HttpServer;Debug;Request # 170: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:52:52.8644;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:52:52.8644;Raven.Database.Server.HttpServer;Debug;Request # 171: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:52:52.9204;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:52:52.9204;Raven.Database.Server.HttpServer;Debug;Request # 172: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:52:52.9204;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:52:52.9204;Raven.Database.Server.HttpServer;Debug;Request # 173: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:53:52.9758;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:53:52.9758;Raven.Database.Server.HttpServer;Debug;Request # 174: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:53:52.9788;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:53:52.9788;Raven.Database.Server.HttpServer;Debug;Request # 175: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:53:53.0308;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:53:53.0308;Raven.Database.Server.HttpServer;Debug;Request # 176: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:53:53.0308;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:53:53.0308;Raven.Database.Server.HttpServer;Debug;Request # 177: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:54:53.0763;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:54:53.0763;Raven.Database.Server.HttpServer;Debug;Request # 178: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:54:53.0763;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:54:53.0763;Raven.Database.Server.HttpServer;Debug;Request # 179: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:54:53.1383;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:54:53.1383;Raven.Database.Server.HttpServer;Debug;Request # 180: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:54:53.1383;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:54:53.1383;Raven.Database.Server.HttpServer;Debug;Request # 181: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:55:53.1937;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:55:53.1937;Raven.Database.Server.HttpServer;Debug;Request # 182: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:55:53.1937;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:55:53.1937;Raven.Database.Server.HttpServer;Debug;Request # 183: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:55:53.3277;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:55:53.3277;Raven.Database.Server.HttpServer;Debug;Request # 184: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:55:53.3277;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:55:53.3277;Raven.Database.Server.HttpServer;Debug;Request # 185: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:56:53.3872;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:56:53.3872;Raven.Database.Server.HttpServer;Debug;Request # 186: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:56:53.3872;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:56:53.3872;Raven.Database.Server.HttpServer;Debug;Request # 187: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:56:53.4342;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:56:53.4342;Raven.Database.Server.HttpServer;Debug;Request # 188: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:56:53.4342;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:56:53.4342;Raven.Database.Server.HttpServer;Debug;Request # 189: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:57:53.5026;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:57:53.5026;Raven.Database.Server.HttpServer;Debug;Request # 190: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:57:53.5026;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:57:53.5026;Raven.Database.Server.HttpServer;Debug;Request # 191: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:57:53.6416;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:57:53.6416;Raven.Database.Server.HttpServer;Debug;Request # 192: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:57:53.6416;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:57:53.6416;Raven.Database.Server.HttpServer;Debug;Request # 193: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:58:53.7150;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:58:53.7150;Raven.Database.Server.HttpServer;Debug;Request # 194: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:58:53.7190;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:58:53.7190;Raven.Database.Server.HttpServer;Debug;Request # 195: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:58:53.8420;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:58:53.8420;Raven.Database.Server.HttpServer;Debug;Request # 196: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:58:53.8420;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:58:53.8420;Raven.Database.Server.HttpServer;Debug;Request # 197: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:59:53.9285;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:59:53.9285;Raven.Database.Server.HttpServer;Debug;Request # 198: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:59:53.9335;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:59:53.9335;Raven.Database.Server.HttpServer;Debug;Request # 199: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 16:59:54.0645;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 16:59:54.0645;Raven.Database.Server.HttpServer;Debug;Request # 200: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 16:59:54.0645;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 16:59:54.0645;Raven.Database.Server.HttpServer;Debug;Request # 201: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:00:54.1549;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:00:54.1549;Raven.Database.Server.HttpServer;Debug;Request # 202: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:00:54.1549;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:00:54.1549;Raven.Database.Server.HttpServer;Debug;Request # 203: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:00:54.2749;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:00:54.2749;Raven.Database.Server.HttpServer;Debug;Request # 204: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:00:54.2749;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:00:54.2749;Raven.Database.Server.HttpServer;Debug;Request # 205: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:01:54.3414;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:01:54.3414;Raven.Database.Server.HttpServer;Debug;Request # 206: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:01:54.3414;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:01:54.3414;Raven.Database.Server.HttpServer;Debug;Request # 207: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:01:54.4854;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:01:54.4854;Raven.Database.Server.HttpServer;Debug;Request # 208: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:01:54.4854;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:01:54.4854;Raven.Database.Server.HttpServer;Debug;Request # 209: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:02:54.5578;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:02:54.5578;Raven.Database.Server.HttpServer;Debug;Request # 210: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:02:54.5578;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:02:54.5578;Raven.Database.Server.HttpServer;Debug;Request # 211: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:02:54.6548;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:02:54.6548;Raven.Database.Server.HttpServer;Debug;Request # 212: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:02:54.6548;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:02:54.6548;Raven.Database.Server.HttpServer;Debug;Request # 213: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:03:54.7202;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:03:54.7212;Raven.Database.Server.HttpServer;Debug;Request # 214: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:03:54.7212;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:03:54.7212;Raven.Database.Server.HttpServer;Debug;Request # 215: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:03:54.8583;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:03:54.8583;Raven.Database.Server.HttpServer;Debug;Request # 216: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:03:54.8723;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:03:54.8723;Raven.Database.Server.HttpServer;Debug;Request # 217: GET     -     4 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:04:54.9587;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:04:54.9587;Raven.Database.Server.HttpServer;Debug;Request # 218: GET     -     3 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:04:54.9587;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:04:54.9587;Raven.Database.Server.HttpServer;Debug;Request # 219: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:04:55.1037;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:04:55.1037;Raven.Database.Server.HttpServer;Debug;Request # 220: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:04:55.1037;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:04:55.1037;Raven.Database.Server.HttpServer;Debug;Request # 221: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:05:55.1761;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:05:55.1761;Raven.Database.Server.HttpServer;Debug;Request # 222: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:05:55.1761;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:05:55.1761;Raven.Database.Server.HttpServer;Debug;Request # 223: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:05:55.3021;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:05:55.3021;Raven.Database.Server.HttpServer;Debug;Request # 224: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:05:55.3021;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:05:55.3021;Raven.Database.Server.HttpServer;Debug;Request # 225: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:06:55.3786;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:06:55.3786;Raven.Database.Server.HttpServer;Debug;Request # 226: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:06:55.3786;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:06:55.3786;Raven.Database.Server.HttpServer;Debug;Request # 227: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:06:55.4616;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:06:55.4616;Raven.Database.Server.HttpServer;Debug;Request # 228: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:06:55.4616;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:06:55.4616;Raven.Database.Server.HttpServer;Debug;Request # 229: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:07:55.5160;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:07:55.5160;Raven.Database.Server.HttpServer;Debug;Request # 230: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:07:55.5160;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:07:55.5160;Raven.Database.Server.HttpServer;Debug;Request # 231: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:07:55.6540;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:07:55.6540;Raven.Database.Server.HttpServer;Debug;Request # 232: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:07:55.6540;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:07:55.6540;Raven.Database.Server.HttpServer;Debug;Request # 233: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:08:55.7335;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:08:55.7335;Raven.Database.Server.HttpServer;Debug;Request # 234: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:08:55.7335;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:08:55.7335;Raven.Database.Server.HttpServer;Debug;Request # 235: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:08:55.8565;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:08:55.8565;Raven.Database.Server.HttpServer;Debug;Request # 236: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:08:55.8565;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:08:55.8565;Raven.Database.Server.HttpServer;Debug;Request # 237: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:09:55.9219;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:09:55.9219;Raven.Database.Server.HttpServer;Debug;Request # 238: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:09:55.9219;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:09:55.9219;Raven.Database.Server.HttpServer;Debug;Request # 239: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:09:56.0119;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:09:56.0119;Raven.Database.Server.HttpServer;Debug;Request # 240: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:09:56.0119;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:09:56.0119;Raven.Database.Server.HttpServer;Debug;Request # 241: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:10:56.0733;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:10:56.0733;Raven.Database.Server.HttpServer;Debug;Request # 242: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:10:56.0733;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:10:56.0733;Raven.Database.Server.HttpServer;Debug;Request # 243: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:10:56.1924;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:10:56.1924;Raven.Database.Server.HttpServer;Debug;Request # 244: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:10:56.1924;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:10:56.1924;Raven.Database.Server.HttpServer;Debug;Request # 245: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:11:56.2638;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:11:56.2638;Raven.Database.Server.HttpServer;Debug;Request # 246: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:11:56.2678;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:11:56.2678;Raven.Database.Server.HttpServer;Debug;Request # 247: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:11:56.3898;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:11:56.3898;Raven.Database.Server.HttpServer;Debug;Request # 248: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:11:56.3898;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:11:56.3898;Raven.Database.Server.HttpServer;Debug;Request # 249: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:12:56.4722;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:12:56.4722;Raven.Database.Server.HttpServer;Debug;Request # 250: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:12:56.4722;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:12:56.4722;Raven.Database.Server.HttpServer;Debug;Request # 251: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:12:56.5952;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:12:56.5952;Raven.Database.Server.HttpServer;Debug;Request # 252: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:12:56.5952;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:12:56.5952;Raven.Database.Server.HttpServer;Debug;Request # 253: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:13:56.6737;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:13:56.6737;Raven.Database.Server.HttpServer;Debug;Request # 254: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:13:56.6737;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:13:56.6737;Raven.Database.Server.HttpServer;Debug;Request # 255: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:13:56.8337;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:13:56.8337;Raven.Database.Server.HttpServer;Debug;Request # 256: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:13:56.8337;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:13:56.8337;Raven.Database.Server.HttpServer;Debug;Request # 257: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:14:56.9041;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:14:56.9041;Raven.Database.Server.HttpServer;Debug;Request # 258: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:14:56.9041;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:14:56.9041;Raven.Database.Server.HttpServer;Debug;Request # 259: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:14:57.0371;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:14:57.0371;Raven.Database.Server.HttpServer;Debug;Request # 260: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:14:57.0401;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:14:57.0401;Raven.Database.Server.HttpServer;Debug;Request # 261: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:15:57.1176;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:15:57.1176;Raven.Database.Server.HttpServer;Debug;Request # 262: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:15:57.1176;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:15:57.1176;Raven.Database.Server.HttpServer;Debug;Request # 263: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:15:57.2416;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:15:57.2416;Raven.Database.Server.HttpServer;Debug;Request # 264: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:15:57.2416;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:15:57.2416;Raven.Database.Server.HttpServer;Debug;Request # 265: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:16:57.3200;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:16:57.3200;Raven.Database.Server.HttpServer;Debug;Request # 266: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:16:57.3200;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:16:57.3200;Raven.Database.Server.HttpServer;Debug;Request # 267: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:16:57.4450;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:16:57.4450;Raven.Database.Server.HttpServer;Debug;Request # 268: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:16:57.4450;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:16:57.4450;Raven.Database.Server.HttpServer;Debug;Request # 269: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:17:57.5185;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:17:57.5185;Raven.Database.Server.HttpServer;Debug;Request # 270: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:17:57.5185;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:17:57.5185;Raven.Database.Server.HttpServer;Debug;Request # 271: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:17:57.6195;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:17:57.6195;Raven.Database.Server.HttpServer;Debug;Request # 272: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:17:57.6195;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:17:57.6195;Raven.Database.Server.HttpServer;Debug;Request # 273: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:18:57.6679;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:18:57.6679;Raven.Database.Server.HttpServer;Debug;Request # 274: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:18:57.6679;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:18:57.6679;Raven.Database.Server.HttpServer;Debug;Request # 275: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:18:57.7309;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:18:57.7309;Raven.Database.Server.HttpServer;Debug;Request # 276: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:18:57.7329;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:18:57.7329;Raven.Database.Server.HttpServer;Debug;Request # 277: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:19:57.7943;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:19:57.7943;Raven.Database.Server.HttpServer;Debug;Request # 278: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:19:57.7943;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:19:57.7943;Raven.Database.Server.HttpServer;Debug;Request # 279: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:19:57.9213;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:19:57.9213;Raven.Database.Server.HttpServer;Debug;Request # 280: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:19:57.9213;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:19:57.9213;Raven.Database.Server.HttpServer;Debug;Request # 281: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:20:58.0138;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:20:58.0138;Raven.Database.Server.HttpServer;Debug;Request # 282: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:20:58.0138;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:20:58.0138;Raven.Database.Server.HttpServer;Debug;Request # 283: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:20:58.1518;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:20:58.1518;Raven.Database.Server.HttpServer;Debug;Request # 284: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:20:58.1518;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:20:58.1518;Raven.Database.Server.HttpServer;Debug;Request # 285: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:21:58.2902;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:21:58.2902;Raven.Database.Server.HttpServer;Debug;Request # 286: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:21:58.2902;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:21:58.2902;Raven.Database.Server.HttpServer;Debug;Request # 287: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:21:58.3922;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:21:58.3922;Raven.Database.Server.HttpServer;Debug;Request # 288: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:21:58.3922;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:21:58.3922;Raven.Database.Server.HttpServer;Debug;Request # 289: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:22:58.4557;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:22:58.4557;Raven.Database.Server.HttpServer;Debug;Request # 290: GET     -     1 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:22:58.4597;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:22:58.4597;Raven.Database.Server.HttpServer;Debug;Request # 291: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:22:58.6167;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:22:58.6167;Raven.Database.Server.HttpServer;Debug;Request # 292: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:22:58.6167;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:22:58.6167;Raven.Database.Server.HttpServer;Debug;Request # 293: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:23:58.6921;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:23:58.6921;Raven.Database.Server.HttpServer;Debug;Request # 294: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:23:58.6921;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:23:58.6921;Raven.Database.Server.HttpServer;Debug;Request # 295: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:23:58.8121;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:23:58.8121;Raven.Database.Server.HttpServer;Debug;Request # 296: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:23:58.8161;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:23:58.8161;Raven.Database.Server.HttpServer;Debug;Request # 297: GET     -     2 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:24:58.8846;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:24:58.8846;Raven.Database.Server.HttpServer;Debug;Request # 298: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:24:58.8846;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:24:58.8846;Raven.Database.Server.HttpServer;Debug;Request # 299: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:24:59.0426;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:24:59.0426;Raven.Database.Server.HttpServer;Debug;Request # 300: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:24:59.0426;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:24:59.0426;Raven.Database.Server.HttpServer;Debug;Request # 301: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:25:59.1980;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:25:59.1980;Raven.Database.Server.HttpServer;Debug;Request # 302: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:25:59.2030;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:25:59.2030;Raven.Database.Server.HttpServer;Debug;Request # 303: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:25:59.3390;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:25:59.3390;Raven.Database.Server.HttpServer;Debug;Request # 304: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:25:59.3430;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:25:59.3430;Raven.Database.Server.HttpServer;Debug;Request # 305: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:26:59.4164;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:26:59.4164;Raven.Database.Server.HttpServer;Debug;Request # 306: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:26:59.4205;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:26:59.4205;Raven.Database.Server.HttpServer;Debug;Request # 307: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:26:59.5785;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:26:59.5785;Raven.Database.Server.HttpServer;Debug;Request # 308: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:26:59.5785;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:26:59.5785;Raven.Database.Server.HttpServer;Debug;Request # 309: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:27:59.6559;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:27:59.6559;Raven.Database.Server.HttpServer;Debug;Request # 310: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:27:59.6559;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:27:59.6559;Raven.Database.Server.HttpServer;Debug;Request # 311: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:27:59.7789;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:27:59.7789;Raven.Database.Server.HttpServer;Debug;Request # 312: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:27:59.7789;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:27:59.7789;Raven.Database.Server.HttpServer;Debug;Request # 313: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:28:59.8433;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:28:59.8433;Raven.Database.Server.HttpServer;Debug;Request # 314: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:28:59.8433;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:28:59.8433;Raven.Database.Server.HttpServer;Debug;Request # 315: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:28:59.9693;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:28:59.9693;Raven.Database.Server.HttpServer;Debug;Request # 316: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:28:59.9693;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:28:59.9693;Raven.Database.Server.HttpServer;Debug;Request # 317: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:30:00.0458;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:30:00.0458;Raven.Database.Server.HttpServer;Debug;Request # 318: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:30:00.0508;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:30:00.0508;Raven.Database.Server.HttpServer;Debug;Request # 319: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:30:00.1508;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:30:00.1508;Raven.Database.Server.HttpServer;Debug;Request # 320: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:30:00.1508;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:30:00.1508;Raven.Database.Server.HttpServer;Debug;Request # 321: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:31:00.1972;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:31:00.1972;Raven.Database.Server.HttpServer;Debug;Request # 322: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:31:00.1972;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:31:00.1972;Raven.Database.Server.HttpServer;Debug;Request # 323: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:31:00.3672;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:31:00.3672;Raven.Database.Server.HttpServer;Debug;Request # 324: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:31:00.3672;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:31:00.3672;Raven.Database.Server.HttpServer;Debug;Request # 325: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:32:00.4377;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:32:00.4377;Raven.Database.Server.HttpServer;Debug;Request # 326: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:32:00.4377;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:32:00.4377;Raven.Database.Server.HttpServer;Debug;Request # 327: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:32:00.5607;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:32:00.5617;Raven.Database.Server.HttpServer;Debug;Request # 328: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:32:00.5617;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:32:00.5617;Raven.Database.Server.HttpServer;Debug;Request # 329: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:33:00.6311;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:33:00.6311;Raven.Database.Server.HttpServer;Debug;Request # 330: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:33:00.6311;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:33:00.6311;Raven.Database.Server.HttpServer;Debug;Request # 331: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:33:00.7171;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:33:00.7171;Raven.Database.Server.HttpServer;Debug;Request # 332: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:33:00.7171;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:33:00.7171;Raven.Database.Server.HttpServer;Debug;Request # 333: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:34:00.7726;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:34:00.7726;Raven.Database.Server.HttpServer;Debug;Request # 334: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:34:00.7766;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:34:00.7766;Raven.Database.Server.HttpServer;Debug;Request # 335: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:34:00.8986;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:34:00.8986;Raven.Database.Server.HttpServer;Debug;Request # 336: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:34:00.9026;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:34:00.9026;Raven.Database.Server.HttpServer;Debug;Request # 337: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:35:00.9730;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:35:00.9730;Raven.Database.Server.HttpServer;Debug;Request # 338: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:35:00.9780;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:35:00.9780;Raven.Database.Server.HttpServer;Debug;Request # 339: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:35:01.1010;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:35:01.1020;Raven.Database.Server.HttpServer;Debug;Request # 340: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:35:01.1020;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:35:01.1020;Raven.Database.Server.HttpServer;Debug;Request # 341: GET     -     1 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:36:01.1834;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:36:01.1834;Raven.Database.Server.HttpServer;Debug;Request # 342: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:36:01.1834;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:36:01.1834;Raven.Database.Server.HttpServer;Debug;Request # 343: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:36:01.3314;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:36:01.3314;Raven.Database.Server.HttpServer;Debug;Request # 344: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:36:01.3364;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:36:01.3364;Raven.Database.Server.HttpServer;Debug;Request # 345: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:37:01.4039;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:37:01.4039;Raven.Database.Server.HttpServer;Debug;Request # 346: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:37:01.4039;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:37:01.4039;Raven.Database.Server.HttpServer;Debug;Request # 347: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:37:01.5289;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:37:01.5289;Raven.Database.Server.HttpServer;Debug;Request # 348: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:37:01.5289;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:37:01.5289;Raven.Database.Server.HttpServer;Debug;Request # 349: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:38:01.6053;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:38:01.6053;Raven.Database.Server.HttpServer;Debug;Request # 350: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:38:01.6103;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:38:01.6103;Raven.Database.Server.HttpServer;Debug;Request # 351: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:38:01.7333;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:38:01.7333;Raven.Database.Server.HttpServer;Debug;Request # 352: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:38:01.7363;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:38:01.7363;Raven.Database.Server.HttpServer;Debug;Request # 353: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:39:01.8618;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:39:01.8618;Raven.Database.Server.HttpServer;Debug;Request # 354: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:39:01.8618;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:39:01.8618;Raven.Database.Server.HttpServer;Debug;Request # 355: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:39:02.0008;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:39:02.0008;Raven.Database.Server.HttpServer;Debug;Request # 356: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:39:02.0008;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:39:02.0008;Raven.Database.Server.HttpServer;Debug;Request # 357: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:40:02.0702;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:40:02.0702;Raven.Database.Server.HttpServer;Debug;Request # 358: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:40:02.0742;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:40:02.0742;Raven.Database.Server.HttpServer;Debug;Request # 359: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:40:02.2122;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:40:02.2122;Raven.Database.Server.HttpServer;Debug;Request # 360: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:40:02.2162;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:40:02.2162;Raven.Database.Server.HttpServer;Debug;Request # 361: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:41:02.2847;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:41:02.2847;Raven.Database.Server.HttpServer;Debug;Request # 362: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:41:02.2847;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:41:02.2847;Raven.Database.Server.HttpServer;Debug;Request # 363: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:41:02.4227;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:41:02.4227;Raven.Database.Server.HttpServer;Debug;Request # 364: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:41:02.4227;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:41:02.4227;Raven.Database.Server.HttpServer;Debug;Request # 365: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:42:02.4961;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:42:02.4961;Raven.Database.Server.HttpServer;Debug;Request # 366: GET     -     1 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:42:02.4961;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:42:02.4961;Raven.Database.Server.HttpServer;Debug;Request # 367: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:42:02.6391;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:42:02.6391;Raven.Database.Server.HttpServer;Debug;Request # 368: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:42:02.6391;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:42:02.6391;Raven.Database.Server.HttpServer;Debug;Request # 369: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:43:02.7205;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:43:02.7205;Raven.Database.Server.HttpServer;Debug;Request # 370: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:43:02.7245;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:43:02.7245;Raven.Database.Server.HttpServer;Debug;Request # 371: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:43:02.8656;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:43:02.8656;Raven.Database.Server.HttpServer;Debug;Request # 372: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:43:02.8656;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:43:02.8656;Raven.Database.Server.HttpServer;Debug;Request # 373: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:44:02.9400;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:44:02.9400;Raven.Database.Server.HttpServer;Debug;Request # 374: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:44:02.9400;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:44:02.9400;Raven.Database.Server.HttpServer;Debug;Request # 375: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:44:03.0840;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:44:03.0840;Raven.Database.Server.HttpServer;Debug;Request # 376: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:44:03.0840;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:44:03.0840;Raven.Database.Server.HttpServer;Debug;Request # 377: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:45:03.1554;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:45:03.1564;Raven.Database.Server.HttpServer;Debug;Request # 378: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:45:03.1564;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:45:03.1564;Raven.Database.Server.HttpServer;Debug;Request # 379: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:45:03.2324;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:45:03.2324;Raven.Database.Server.HttpServer;Debug;Request # 380: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:45:03.2324;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:45:03.2344;Raven.Database.Server.HttpServer;Debug;Request # 381: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:46:03.3159;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:46:03.3159;Raven.Database.Server.HttpServer;Debug;Request # 382: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:46:03.3159;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:46:03.3159;Raven.Database.Server.HttpServer;Debug;Request # 383: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:46:03.4589;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:46:03.4589;Raven.Database.Server.HttpServer;Debug;Request # 384: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:46:03.4589;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:46:03.4589;Raven.Database.Server.HttpServer;Debug;Request # 385: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:47:03.5363;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:47:03.5363;Raven.Database.Server.HttpServer;Debug;Request # 386: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:47:03.5363;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:47:03.5363;Raven.Database.Server.HttpServer;Debug;Request # 387: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:47:03.6603;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:47:03.6603;Raven.Database.Server.HttpServer;Debug;Request # 388: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:47:03.6603;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:47:03.6603;Raven.Database.Server.HttpServer;Debug;Request # 389: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:48:03.7398;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:48:03.7398;Raven.Database.Server.HttpServer;Debug;Request # 390: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:48:03.7438;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:48:03.7438;Raven.Database.Server.HttpServer;Debug;Request # 391: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:48:03.8798;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:48:03.8798;Raven.Database.Server.HttpServer;Debug;Request # 392: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:48:03.8838;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:48:03.8838;Raven.Database.Server.HttpServer;Debug;Request # 393: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:49:03.9532;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:49:03.9532;Raven.Database.Server.HttpServer;Debug;Request # 394: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:49:03.9532;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:49:03.9532;Raven.Database.Server.HttpServer;Debug;Request # 395: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:49:04.1132;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:49:04.1132;Raven.Database.Server.HttpServer;Debug;Request # 396: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:49:04.1172;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:49:04.1172;Raven.Database.Server.HttpServer;Debug;Request # 397: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:50:04.1867;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:50:04.1867;Raven.Database.Server.HttpServer;Debug;Request # 398: GET     -     1 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:50:04.1867;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:50:04.1917;Raven.Database.Server.HttpServer;Debug;Request # 399: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;
+2011-11-26 17:50:04.3237;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-26 17:50:04.3237;Raven.Database.Server.HttpServer;Debug;Request # 400: GET     -     0 ms - <default>  - 200 - /docs/Raven/Databases/DotNetQuizTest;
+2011-11-26 17:50:04.3237;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Replication/Destinations' was not found;
+2011-11-26 17:50:04.3237;Raven.Database.Server.HttpServer;Debug;Request # 401: GET     -     0 ms - <default>  - 404 - /docs/Raven/Replication/Destinations;

@@ -1,0 +1,85 @@
+time;logger;level;message;exception
+2011-11-25 10:46:58.5310;Raven.Database.Indexing.WorkContext;Debug;Stopping background workers;
+2011-11-25 10:47:05.0433;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-25 10:47:05.0433;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-25 10:47:05.0443;Raven.Database.Util.PortUtil;Info;Default port 8080 was not available, so using available port 8081;
+2011-11-25 10:47:05.0953;Raven.Database.Impl.DocumentCacher;Info;"MemoryCache Settings:
+  PhysicalMemoryLimit = 99
+  CacheMemoryLimit    = 3192913920
+  PollingInterval     = 00:02:00";
+2011-11-25 10:47:05.0953;Raven.Storage.Esent.TransactionalStorage;Info;"Esent Settings:
+  MaxVerPages      = 32768
+  CacheSizeMax     = 262144
+  DatabasePageSize = 4096";
+2011-11-25 10:47:25.5135;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Databases/DotNetQuizTest' was found;
+2011-11-25 10:47:27.1336;Raven.Database.Storage.IndexDefinitionStorage;Info;"New index Raven%2fDocumentsByEntityName:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+where  Tag != null 
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.ForEntityNames.Add(null);
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			where Tag != null
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+
+Compiled to:
+using Raven.Abstractions;
+using Raven.Database.Linq;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using System;
+using Raven.Database.Linq.PrivateExtensions;
+using Lucene.Net.Documents;
+using Raven.Database.Indexing;
+public class Index_Raven_2fDocumentsByEntityName : AbstractViewGenerator
+{
+	public Index_Raven_2fDocumentsByEntityName()
+	{
+		this.ViewText = @""from doc in docs 
+let Tag = doc[""""@metadata""""][""""Raven-Entity-Name""""]
+where  Tag != null 
+select new { Tag, LastModified = (DateTime)doc[""""@metadata""""][""""Last-Modified""""] };
+"";
+		this.ForEntityNames.Add(null);
+		this.AddMapDefinition(docs => from doc in docs
+			let Tag = doc[""@metadata""][""Raven-Entity-Name""]
+			where Tag != null
+			select new { Tag, LastModified = (DateTime)doc[""@metadata""][""Last-Modified""], __document_id = doc.__document_id });
+		this.AddField(""LastModified"");
+		this.AddField(""__document_id"");
+		this.AddField(""Tag"");
+		this.AddQueryParameterForMap(""__document_id"");
+		this.AddQueryParameterForReduce(""__document_id"");
+	}
+}
+";
+2011-11-25 10:47:27.1336;Raven.Database.Indexing.IndexStorage;Debug;Loading saved index Raven/DocumentsByEntityName;
+2011-11-25 10:47:27.1356;Raven.Database.Indexing.Index.Indexing;Debug;Creating index for Raven/DocumentsByEntityName;
+2011-11-25 10:47:27.1356;Raven.Database.DocumentDatabase;Debug;Delete a document with key: Raven/Backup/Status and etag ;
+2011-11-25 10:47:27.1506;Raven.Storage.Esent.StorageActions.DocumentStorageActions;Debug;Document with key 'Raven/Backup/Status' was not found, and considered deleted;
+2011-11-25 10:47:27.1686;Raven.Database.Server.HttpServer;Debug;Request # 397: GET     - 22 125 ms - DotNetQuizTest - 200 - /stats?noCache=-989676673;
+2011-11-25 10:47:27.1846;Raven.Database.Server.HttpServer;Debug;Request # 398: GET     - 22 141 ms - DotNetQuizTest - 200 - /stats?noCache=-2105788571;
+2011-11-25 10:47:27.2346;Raven.Database.Server.HttpServer;Debug;Request # 399: GET     - 1 721 ms - DotNetQuizTest - 200 - /stats?noCache=-1033326702;

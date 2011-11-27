@@ -1,0 +1,2 @@
+time;logger;level;message;exception
+2011-11-23 00:24:15.5936;Raven.Database.Indexing.WorkContext;Debug;Stopping background workers;
