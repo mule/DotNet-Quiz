@@ -63,6 +63,7 @@ namespace DotNetQuizDataAccess.Models
                                     var correctAnswers = question.AnswerOptions.Where(ao => ao.Item3 == true);
                 if (answers.Any(answer => !correctAnswers.Select(ca => ca.Item1).Contains(answer)))
                 {
+                    UnitOfWork.Commit();
                     return false;
                 }
 
@@ -70,6 +71,7 @@ namespace DotNetQuizDataAccess.Models
                 
 
                     UnitOfWork.Commit();
+                   
                 }
 
             }
